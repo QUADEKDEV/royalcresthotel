@@ -1,6 +1,20 @@
 "use client"
 import { div } from 'framer-motion/client';
 import React, { useState} from 'react'
+import {
+  Star,
+  Wifi,
+  Coffee,
+  MapPin,
+  Calendar,
+  Users,
+  Check,
+  ArrowRight,
+  Menu,
+  X,
+  CreditCard,
+  Loader2,
+} from "lucide-react";
 
 const NavBar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
