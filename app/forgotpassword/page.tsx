@@ -43,7 +43,7 @@ export default function ForgotPasswordPage() {
         {/* Brand Header */}
         <div className="text-center mb-12">
           <div className="text-2xl font-serif font-bold tracking-[0.2em] text-slate-900 mb-2">
-            LUMINA<span className="text-amber-500">.</span>
+            ROYAL CREST<span className="text-amber-500">.</span>
           </div>
           <div className="h-0.5 w-12 bg-amber-500 mx-auto rounded-full" />
         </div>
@@ -78,7 +78,7 @@ export default function ForgotPasswordPage() {
                       type="email" 
                       required
                       value={email}
-                      placeholder="alexander@lumina.com"
+                      placeholder="luxury@royalcrest.com"
                       className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-4 focus:ring-amber-500/5 focus:border-amber-500 transition-all placeholder:text-slate-300 text-slate-700"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -145,7 +145,7 @@ export default function ForgotPasswordPage() {
         </AnimatePresence>
 
         <p className="mt-12 text-center text-slate-400 text-[10px] uppercase tracking-[0.2em]">
-          &copy; 2024 Lumina Hotels & Resorts • Private Collection
+          &copy; 2024 Royal Crest Hotels & Resorts • Private Collection
         </p>
       </motion.div>
     </div>

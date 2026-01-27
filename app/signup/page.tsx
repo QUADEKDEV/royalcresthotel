@@ -1,19 +1,9 @@
 "use client"
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Mail,
-  Lock,
-  User,
-  Phone,
-  ArrowRight,
-  Loader2,
-  Eye,
-  EyeOff,
-  CheckCircle2,
-  ChevronLeft,
+import {Mail,Lock,User,Phone,ArrowRight,Loader2,Eye,EyeOff,CheckCircle2,ChevronLeft,
 } from "lucide-react";
-
+import { signUp } from "../utils/actions";
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -26,16 +16,25 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
+    const response = await signUp(formData);
+
+    if (!response.success) {
+      alert(response.message);
+    } else {
+      alert(response.message);
+    }
     // Simulate account creation
     setTimeout(() => {
       setIsLoading(false);
       setIsSuccess(true);
     }, 2000);
   };
+
+  
 
   if (isSuccess) {
     return (
@@ -54,7 +53,7 @@ export default function SignUpPage() {
             Welcome to the Collection
           </h1>
           <p className="text-slate-500 leading-relaxed">
-            Your Lumina account has been created. A verification link has been
+            Your Royal Crest account has been created. A verification link has been
             sent to <strong>{formData.email}</strong>.
           </p>
           <button
@@ -73,7 +72,7 @@ export default function SignUpPage() {
       {/* Left Side: Brand Narrative */}
       <div className="hidden lg:flex w-5/12 relative bg-slate-900 overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1578683010236-d716f9a3f261?q=80&w=2070&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2049&auto=format&fit=crop"
           alt="Luxury Bedroom View"
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />
@@ -81,7 +80,7 @@ export default function SignUpPage() {
 
         <div className="relative z-10 p-16 flex flex-col justify-between w-full">
           <div className="text-2xl font-serif font-bold tracking-widest text-white">
-            LUMINA<span className="text-amber-500">.</span>
+            ROYAL CREST<span className="text-amber-500">.</span>
           </div>
 
           <motion.div
@@ -112,12 +111,7 @@ export default function SignUpPage() {
 
       {/* Right Side: Sign Up Form */}
       <div className="flex-1 bg-[#FDFBF7] flex flex-col items-center justify-center p-8 md:p-16 relative">
-        <button
-          onClick={() => (window.location.href = "/login")}
-          className="absolute top-8 left-8 lg:left-16 flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors text-sm font-medium"
-        >
-          <ChevronLeft size={16} /> Back to login
-        </button>
+       
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -129,7 +123,7 @@ export default function SignUpPage() {
               Create your account
             </h1>
             <p className="text-slate-500">
-              Begin your journey with Lumina Hotels & Resorts.
+              Begin your journey with Royal Crest Hotels & Resorts.
             </p>
           </div>
 

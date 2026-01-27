@@ -32,7 +32,7 @@ const Navbar = () => {
           className="text-2xl font-serif font-bold tracking-tighter text-slate-900 cursor-pointer"
           onClick={() => (window.location.href = "/")}
         >
-          LUMINA<span className="text-amber-500">.</span>
+          ROYAL CREST<span className="text-amber-500">.</span>
         </div>
         <div className="hidden md:flex items-center space-x-8 font-medium text-slate-600">
           <a href="#" className="hover:text-amber-500 transition-colors">
@@ -154,7 +154,7 @@ const LeafletMap = () => {
       .bindPopup(
         `
         <div style="font-family: serif; text-align: center; padding: 5px;">
-          <b style="font-size: 16px; color: #0f172a;">Lumina Resort</b><br>
+          <b style="font-size: 16px; color: #0f172a;">Royal Crest Resort</b><br>
           <span style="color: #d97706; font-size: 14px;">★★★★★</span><br>
           <span style="color: #64748b; font-size: 12px;">Paradise Road, Seychelles</span>
         </div>
@@ -336,7 +336,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-slate-900">Email Us</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      concierge@lumina.com
+                      quadek@royalcrest.com
                     </p>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export default function ContactPage() {
 
       {/* Footer Simple */}
       <footer className="bg-white py-8 text-center text-slate-400 text-sm">
-        <p>&copy; 2025 Lumina Hotels & Resorts. All rights reserved.</p>
+        <p>&copy; 2025 Royal Crest Hotels & Resorts. All rights reserved.</p>
       </footer>
     </div>
   );
