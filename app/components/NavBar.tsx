@@ -30,14 +30,17 @@ const NavBar = () => {
             Royal Crest Hotels<span className="text-amber-500">.</span>
           </div>
           <div className="hidden md:flex items-center space-x-8 font-medium text-slate-600">
-            <a href="#" className="hover:text-amber-500 transition-colors">
+            <a href="/" className="hover:text-amber-500 transition-colors">
+              Home
+            </a>
+            <a href="/suites" className="hover:text-amber-500 transition-colors">
               Suites
             </a>
-            <a href="#" className="hover:text-amber-500 transition-colors">
-              Dining
+            <a href="/contactus" className="hover:text-amber-500 transition-colors">
+              Contact Us
             </a>
-            <a href="#" className="text-amber-600">
-              Contact
+            <a href="/about" className="text-amber-600">
+              About Us
             </a>
             <button className="bg-slate-900 text-white px-6 py-2 rounded-full hover:bg-slate-800 transition-all">
               Book Now

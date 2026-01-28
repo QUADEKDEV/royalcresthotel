@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import Footer from "../components/Footer";
 import {
   MapPin,
   Phone,
@@ -12,6 +13,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
+import NavBar from "../components/NavBar";
 
 // --- Types for Leaflet (Mocking for TypeScript since we load via CDN) ---
 declare global {
@@ -20,55 +22,8 @@ declare global {
   }
 }
 
-// --- Components ---
 
-const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm py-4">
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <div
-          className="text-2xl font-serif font-bold tracking-tighter text-slate-900 cursor-pointer"
-          onClick={() => (window.location.href = "/")}
-        >
-          ROYAL CREST<span className="text-amber-500">.</span>
-        </div>
-        <div className="hidden md:flex items-center space-x-8 font-medium text-slate-600">
-          <a href="#" className="hover:text-amber-500 transition-colors">
-            Suites
-          </a>
-          <a href="#" className="hover:text-amber-500 transition-colors">
-            Dining
-          </a>
-          <a href="#" className="text-amber-600">
-            Contact
-          </a>
-          <button className="bg-slate-900 text-white px-6 py-2 rounded-full hover:bg-slate-800 transition-all">
-            Book Now
-          </button>
-        </div>
-        <button
-          className="md:hidden text-slate-900"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
-      </div>
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t p-6 space-y-4">
-          <a href="#" className="block font-medium text-slate-900">
-            Suites
-          </a>
-          <a href="#" className="block font-medium text-slate-900">
-            Contact
-          </a>
-        </div>
-      )}
-    </nav>
-  );
-};
 
 const LeafletMap = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -97,12 +52,12 @@ const LeafletMap = () => {
         return;
       }
 
-      // 3. Load Script if not present
+      
       const script = document.createElement("script");
       script.id = "leaflet-script";
       script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
       script.async = true;
-      script.onload = () => initMap(); // Init map once script loads
+      script.onload = () => initMap(); 
       document.body.appendChild(script);
     };
 
@@ -119,8 +74,7 @@ const LeafletMap = () => {
   const initMap = () => {
     if (!mapContainerRef.current || !window.L || mapInstanceRef.current) return;
 
-    // Hotel Coordinates (Simulating a location in Seychelles)
-    const hotelCoords = [-4.6796, 55.492];
+    const hotelCoords = [7.757748, 4.529033];
 
     // Initialize Map
     const map = window.L.map(mapContainerRef.current, {
@@ -132,6 +86,7 @@ const LeafletMap = () => {
     mapInstanceRef.current = map;
 
     // Add Dark/Contrast Tile Layer for luxury feel
+     
     window.L.tileLayer(
       "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
       {
@@ -156,7 +111,7 @@ const LeafletMap = () => {
         <div style="font-family: serif; text-align: center; padding: 5px;">
           <b style="font-size: 16px; color: #0f172a;">Royal Crest Resort</b><br>
           <span style="color: #d97706; font-size: 14px;">★★★★★</span><br>
-          <span style="color: #64748b; font-size: 12px;">Paradise Road, Seychelles</span>
+          <span style="color: #64748b; font-size: 12px;">Ogo-oluwa, Osogbo</span>
         </div>
       `
       )
@@ -181,7 +136,7 @@ const ContactForm = () => {
           </label>
           <input
             type="text"
-            placeholder="Jane"
+            placeholder="First Name"
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
           />
         </div>
@@ -191,7 +146,7 @@ const ContactForm = () => {
           </label>
           <input
             type="text"
-            placeholder="Doe"
+            placeholder="Last Name"
             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
           />
         </div>
@@ -203,7 +158,7 @@ const ContactForm = () => {
         </label>
         <input
           type="email"
-          placeholder="jane@example.com"
+          placeholder="quadek@example.com"
           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
         />
       </div>
@@ -241,7 +196,7 @@ const ContactForm = () => {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900 pt-20">
-      <Navbar />
+      <NavBar />
 
       {/* Header */}
       <div className="bg-slate-900 text-white py-20 px-6">
@@ -310,8 +265,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-slate-900">Visit Us</h3>
                     <p className="text-sm text-slate-500 leading-relaxed mt-1">
-                      124 Paradise Road, <br />
-                      Anse Royale, Seychelles
+                      Opposite Jaiz bank, <br />
+                      ogo-oluwa, Osogbo
                     </p>
                   </div>
                 </div>
@@ -323,7 +278,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-bold text-slate-900">Call Us</h3>
                     <p className="text-sm text-slate-500 mt-1">
-                      +248 4 123 456
+                      +234 703 313 7268
                     </p>
                     <p className="text-xs text-slate-400">Mon-Sun, 24/7</p>
                   </div>
@@ -345,11 +300,7 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-
-      {/* Footer Simple */}
-      <footer className="bg-white py-8 text-center text-slate-400 text-sm">
-        <p>&copy; 2025 Royal Crest Hotels & Resorts. All rights reserved.</p>
-      </footer>
+    <Footer/>
     </div>
   );
 }

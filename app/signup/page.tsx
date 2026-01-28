@@ -4,14 +4,24 @@ import { motion } from "framer-motion";
 import {Mail,Lock,User,Phone,ArrowRight,Loader2,Eye,EyeOff,CheckCircle2,ChevronLeft,
 } from "lucide-react";
 import { signUp } from "../utils/actions";
+import toast from "react-hot-toast";
+
 export default function SignUpPage() {
+
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
+     firstname:"",
+  lastname: "",
+  email: "",
+  phone: "",
+  password: "",
+
+    // firstName: "",
+    // lastName: "",
+    // email: "",
+    // phone: "",
+    // password: "",
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -19,23 +29,19 @@ export default function SignUpPage() {
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     const response = await signUp(formData);
-
     if (!response.success) {
+       toast.success('hi');
       alert(response.message);
     } else {
+       toast.success("hi");
       alert(response.message);
+      setIsSuccess(true);
     }
-    // Simulate account creation
     setTimeout(() => {
       setIsLoading(false);
-      setIsSuccess(true);
     }, 2000);
   };
-
-  
-
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-6 font-sans">
@@ -66,7 +72,6 @@ export default function SignUpPage() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen bg-white flex flex-col lg:flex-row font-sans selection:bg-amber-100 selection:text-amber-900">
       {/* Left Side: Brand Narrative */}
@@ -144,7 +149,7 @@ export default function SignUpPage() {
                     placeholder="First Name"
                     className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
                     onChange={(e) =>
-                      setFormData({ ...formData, firstName: e.target.value })
+                      setFormData({ ...formData, firstname: e.target.value })
                     }
                   />
                 </div>
@@ -164,7 +169,7 @@ export default function SignUpPage() {
                     placeholder="Last Name"
                     className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
                     onChange={(e) =>
-                      setFormData({ ...formData, lastName: e.target.value })
+                      setFormData({ ...formData, lastname: e.target.value })
                     }
                   />
                 </div>

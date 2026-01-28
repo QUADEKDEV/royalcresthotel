@@ -1,15 +1,9 @@
 "use client"
 import React from "react";
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import {
-  Award,
-  Globe,
-  ShieldCheck,
-  Heart,
-  ArrowRight,
-  Play,
-  ChevronDown,
-} from "lucide-react";
+import {Award,Globe,ShieldCheck,Heart,ArrowRight,Play,ChevronDown,} from "lucide-react";
 
 const stats = [
   { label: "Years of Excellence", value: "25+" },
@@ -42,13 +36,14 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans selection:bg-amber-200 selection:text-amber-900">
-      {/* Hero Section */}
+      <NavBar/>
+  
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2080&auto=format&fit=crop"
             className="w-full h-full object-cover"
-            alt="Lumina Heritage"
+            alt="Royal Crest"
           />
           <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-[1px]" />
         </div>
@@ -82,7 +77,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story Section */}
+     
       <section className="py-24 md:py-32 container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -108,7 +103,7 @@ export default function AboutPage() {
                 </button>
               </div>
             </div>
-            {/* Decorative element */}
+        
             <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-amber-100 rounded-full -z-10 blur-3xl opacity-60" />
           </motion.div>
 
@@ -126,18 +121,16 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 text-slate-600 leading-relaxed text-lg font-light">
               <p>
-                Founded in the crystalline shores of the Mediterranean, Lumina
-                began as a boutique retreat for those seeking more than just a
-                room—they sought a transformation.
+                Royal Crest began as a retreat for those seeking more than just a room—they sought a transformation.
               </p>
               <p>
-                Our founder, Elena Vance, believed that true luxury lies in the
+                Our founder believed that true luxury lies in the
                 details that often go unnoticed: the perfect angle of morning
                 light, the scent of wild jasmine, and the intuitive grace of a
                 silent host.
               </p>
               <p>
-                Today, Lumina stands as a beacon of world-class hospitality,
+                Today, Royal Crest stands as a beacon of world-class hospitality,
                 blending local culture with avant-garde design to create
                 sanctuaries that breathe.
               </p>
@@ -151,7 +144,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats Section */}
+    
       <section className="bg-slate-900 py-20">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
@@ -176,7 +169,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Philosophy / Values Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
@@ -220,7 +212,7 @@ export default function AboutPage() {
                 The Curators of Comfort
               </h2>
               <p className="text-slate-500 text-lg font-light">
-                Meet the visionaries who orchestrate the Lumina experience
+                Meet the visionaries who orchestrate the Royal Crest experience
                 across our global portfolio of properties.
               </p>
             </div>
@@ -290,6 +282,7 @@ export default function AboutPage() {
           </button>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 }

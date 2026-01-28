@@ -10,13 +10,8 @@ import { encrypt,decrypt } from "./session"
 import { redirect } from "next/dist/server/api-utils"
 
 export const signUp = async (userData: {
-//   email: string;
-//   password: string;
-//   firstname: string;
-//   lastname: string;
-
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: string;
   password: string;
@@ -51,7 +46,7 @@ export const signUp = async (userData: {
   } catch (error) {
     return {
       success: false,
-      message: "something went wrong",
+      message: error,
     };
   }
 };
