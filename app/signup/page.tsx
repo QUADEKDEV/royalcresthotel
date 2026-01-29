@@ -3,23 +3,18 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {Mail,Lock,User,Phone,ArrowRight,Loader2,Eye,EyeOff,CheckCircle2,ChevronLeft,
 } from "lucide-react";
-import { signUp } from "../utils/actions";
+import { signUp,sendMail } from "../utils/actions";
 import toast from "react-hot-toast";
 
 export default function SignUpPage() {
 
+ 
   const [formData, setFormData] = useState({
-     firstname:"",
+  firstname:"",
   lastname: "",
   email: "",
   phone: "",
   password: "",
-
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // phone: "",
-    // password: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -31,16 +26,15 @@ export default function SignUpPage() {
     setIsLoading(true);
     const response = await signUp(formData);
     if (!response.success) {
-       toast.success('hi');
-      alert(response.message);
+       toast.error(response.message as string);
+       setIsLoading(false);
     } else {
-       toast.success("hi");
-      alert(response.message);
+      const eMail=formData.email
+      const fullName = `${formData.firstname} ${formData.lastname}`;
+      sendMail({fullName,eMail})
+       toast.success(response.message as string);
       setIsSuccess(true);
     }
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
   };
   if (isSuccess) {
     return (
@@ -56,10 +50,10 @@ export default function SignUpPage() {
             </div>
           </div>
           <h1 className="text-3xl font-serif font-bold text-slate-900">
-            Welcome to the Collection
+            Welcome to Royal Crest Hotels.
           </h1>
           <p className="text-slate-500 leading-relaxed">
-            Your Royal Crest account has been created. A verification link has been
+            Your Royal Crest account has been created. An email has been
             sent to <strong>{formData.email}</strong>.
           </p>
           <button

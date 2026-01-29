@@ -1,7 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import toast from 'react-hot-toast';
+import { signIn } from '../utils/actions';
+import { useRouter} from 'next/router';
+
+import {
   Mail, Lock, ArrowRight, Loader2, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
@@ -11,21 +15,22 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
-  const handleLogin = (e: React.FormEvent) => {
+
+
+
+  const handleLogin =async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
-
-    // Simulate API call
-    setTimeout(() => {
-      if (email === 'guest@royalcrest.com' && password === 'luxury') {
-        // alert('Login Successful! Redirecting...');
-        window.location.href = '/';
-      } else {
-        setError('Invalid credentials.');
-        setIsLoading(false);
-      }
-    }, 2000);
+    setError("");
+    let response = await signIn({email,password});
+    if (!response.success) {
+       setError(response.message);
+       setIsLoading(false);
+    } else {
+      toast.success(response.message);
+        window.location.href = '/admindashboard';
+      // route.push("/admindashboard");
+    }
   };
 
   return (

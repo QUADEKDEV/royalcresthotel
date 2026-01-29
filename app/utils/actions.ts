@@ -1,13 +1,9 @@
 "use server"
-import { refresh, revalidatePath } from "next/cache"
 import { dbConnect } from "./dbConnect"
-import { MongooseError } from "mongoose"
 import * as bcrypt from "bcryptjs"
-// import * as bcrypt from "bcrypt"
 import UserModel from "@/models/user"
 import { cookies } from "next/headers"
 import { encrypt,decrypt } from "./session"
-import { redirect } from "next/dist/server/api-utils"
 
 export const signUp = async (userData: {
   firstname: string;
@@ -25,7 +21,7 @@ export const signUp = async (userData: {
     const existUser = await UserModel.findOne({ email: userData.email });
     if (existUser) {
       return {
-        message: "user exist",
+        message: "user already exist",
         success: false,
       };
     }
@@ -51,102 +47,142 @@ export const signUp = async (userData: {
   }
 };
 
-// export const logout =async ()=>{
-//     try {
-//         const cookieStore = await cookies();
-//         cookieStore.delete("token");
-//         // return { success: true };
-//     } catch (error) {
-//         redirect("/signin")
-//         // return { success: false };
-//     }
-   
-// }
-// export const singIn = async(LogData:{email:string, password:string})=>{
-//    try {
-//        await dbConnect()
-//        const user = await UserModel.findOne({ email: LogData.email }).select('+password')
-//         console.log(user);
-        
-//        if (!user) {
-//            return {
-//                success: false,
-//                message: 'invalid credentials'
-//            }
-//        }
-//        const isUser = await bcrypt.compare(LogData.password, user.password)
+export const signIn=async(LogData:{email:string, password:string})=>{
+  try {
+    await dbConnect();
+    const user = await UserModel.findOne({ email: LogData.email }).select(
+      "+password",
+    );
 
-//        if (!isUser) {
-//            return {
-//                success: false,
-//                message: 'invalid credentials'
-//            }
-//        }
+    if (!user) {
+      return {
+        success: false,
+        message: "invalid credentials",
+      };
+    }
+    const isUser = await bcrypt.compare(LogData.password, user.password);
 
-//        const cookieStore = await cookies();
-//        const token = await encrypt({ _id: user._id.toString() });
-//        cookieStore.set('token', token)
-//        console.log(token)
-//        return {
-//            success: true,
-//            message: 'user successfully logged in'
-//        }
-//    } catch (error) {
-//     return{
-//         success: false,
-//         message: ' something went wrong'
-//     }
-//    }
-// }
+    if (!isUser) {
+      return {
+        success: false,
+        message: "invalid credentials",
+      };
+    }
 
+    const cookieStore = await cookies();
+    const token = await encrypt({ _id: user._id.toString() });
+    cookieStore.set("token", token);
+    return {
+      success: true,
+      message: "user successfully logged in",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: " something went wrong",
+    };
+  }
+}
 
-//  export const getUser = async () => {
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
-//      await dbConnect();
-//      const cookieStore = await cookies();
-//      const token = cookieStore.get("token")?.value;
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.NODE_MAIL,
+    pass: process.env.NODE_MAIL_PASS,
+  },
+});
 
-//      if (!token) {
-//        return { success: false, message: "No token found" };
-//      }
+export const sendMail = async (details: {
+  fullName: string;
+  eMail: string;
+}) => {
+  const { fullName, eMail } = details;
+  const Mail = {
+    from: process.env.NODE_MAIL,
+    to: eMail,
+    subject: "Royal Crest Hotels",
+    html: ` <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Royal Crest</title>
+      <style>
+        body { margin: 0; padding: 0; background-color: #FDFBF7; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        .wrapper { width: 100%; table-layout: fixed; background-color: #FDFBF7; padding-bottom: 40px; }
+        .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; border-spacing: 0; color: #1e293b; }
+        .header { background-color: #0f172a; padding: 40px; text-align: center; }
+        .logo { color: #ffffff; font-size: 24px; font-weight: bold; letter-spacing: 4px; text-decoration: none; }
+        .content { padding: 40px 30px; line-height: 1.6; }
+        .greeting { font-size: 28px; color: #0f172a; margin-bottom: 20px; font-weight: 700; }
+        .membership-card { background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 16px; padding: 25px; margin: 30px 0; }
+        .button { background-color: #f59e0b; color: #ffffff !important; padding: 15px 30px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 20px; }
+        .footer { padding: 30px; text-align: center; font-size: 12px; color: #94a3b8; }
+        .suite-preview { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .suite-card { padding: 10px; width: 50%; }
+        .suite-img { width: 100%; border-radius: 12px; height: 120px; object-fit: cover; }
+      </style>
+    </head>
+    <body>
+      <center class="wrapper">
+        <table class="main">
+          <tr>
+            <td class="header">
+              <div class="logo">Royal Crest<span style="color: #f59e0b;">.</span></div>
+            </td>
+          </tr>
+          <tr>
+            <td class="content">
+              <div class="greeting">Hello ${fullName},</div>
+              <p>Welcome to <strong>Royal Crest Hotels</strong>.</p>
+              <p>You didn’t just sign up for an account; you’ve unlocked the gates to a sanctuary designed for the discerning traveler. At Royal Crest, we believe that luxury is about the moments of stillness and the seamless service that follows you from check-in to checkout.</p>
+              
+              <div class="membership-card">
+                <p style="margin: 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #f59e0b; font-weight: bold;">Current Status</p>
+                <p style="margin: 5px 0; font-size: 20px; font-weight: bold; color: #0f172a;">Member</p>
+                <p style="margin: 0; font-size: 13px; color: #64748b;">₦5,000 Bonus Balance</p>
+              </div>
 
-//      // decrypt token
-//      const decoded = await decrypt(token);
-//          const userId = decoded?.payload?._id;
+              <h3 style="font-size: 18px; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px;">Where Will You Go First?</h3>
+              <table class="suite-preview">
+                <tr>
+                  <td class="suite-card">
+                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=400" class="suite-img">
+                    <p style="font-size: 14px; font-weight: bold; margin: 10px 0 5px;">Royal Ocean Suite</p>
+                    <a href="#" style="color: #f59e0b; font-size: 12px; text-decoration: none; font-weight: bold;">Explore →</a>
+                  </td>
+                  <td class="suite-card">
+                    <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=400" class="suite-img">
+                    <p style="font-size: 14px; font-weight: bold; margin: 10px 0 5px;">Zen Garden Studio</p>
+                    <a href="#" style="color: #f59e0b; font-size: 12px; text-decoration: none; font-weight: bold;">Explore →</a>
+                  </td>
+                </tr>
+              </table>
 
-//      // FETCH USER USING THE STRING ID
-//      const user = await UserModel.findById(userId)
-//     //  .lean();
-//     return { success:true, message: "User found" };
+              <center>
+                <a href="https://Royal Crest-hotels.com/dashboard" class="button">Visit Member Dashboard</a>
+              </center>
+            </td>
+          </tr>
+          <tr>
+            <td class="footer">
+              <p>You received this email because you signed up for a Royal Crest account.</p>
+              <p>© 2026 Royal Crest Hotels & Resorts. All rights reserved.</p>
+              <p><a href="#" style="color: #94a3b8;">Unsubscribe</a> | <a href="#" style="color: #94a3b8;">Privacy Policy</a></p>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </body>
+    </html>`,
+  };
 
-//      if (!user) {
-//        return { success: false, message: "User not found" };
-//      }
-
-
-
-
-
-
-// //    await dbConnect();
-// //    const cookieStore = await cookies();
-// //    const token = cookieStore.get("token")?.value;
-
-// //    if (!token) {
-// //     alert("No Token")
-// //    }
-// //    else{
-// //      const decoded = await decrypt(token);
-// //       if (!decoded || !decoded.payload) {
-// //         alert("Invalid Token")
-// //       }
-// //       else{
-// //          const user = await UserModel.findById(
-// //            decoded.payload).lean();
-// //            return{user}
-
-// //       }
-// //    }
-
-// //    return NextResponse.json({ success: true, user });
-//  };
+  await transporter.sendMail(Mail, function (err: string) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
