@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { logout } from "../utils/actions";
 import {
   LayoutDashboard,
   Plus,
@@ -21,6 +22,8 @@ import {
   Menu,
   LogOut,
 } from "lucide-react";
+import toast from "react-hot-toast";
+import { redirect } from "next/dist/server/api-utils";
 
 // Mock initial data
 const initialRooms = [
@@ -62,7 +65,14 @@ export default function AdminDashboard() {
     size: "",
     description: "",
   });
-
+const handleLogout=async()=>{
+  const response=await logout();
+  if (!response){
+    toast.error("Something went wrong")
+  }
+  toast.success(response.message)
+  window.location.href = "/login"
+}
   const handleAddRoom = (e: React.FormEvent) => {
     e.preventDefault();
     const roomToAdd = {
@@ -92,7 +102,7 @@ export default function AdminDashboard() {
     <>
       <div className="flex items-center justify-between mb-12">
         <div className="text-xl font-serif font-bold tracking-widest text-white">
-          LUMINA<span className="text-amber-500">.</span>
+          Royal Crest<span className="text-amber-500">.</span>
         </div>
         <button
           className="lg:hidden text-white"
@@ -131,7 +141,7 @@ export default function AdminDashboard() {
         </p>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-white">Alexander Vance</p>
-          <LogOut
+          <LogOut onClick={handleLogout}
             size={14}
             className="text-slate-500 cursor-pointer hover:text-white"
           />
@@ -176,7 +186,7 @@ export default function AdminDashboard() {
         {/* Mobile Header Toggle */}
         <div className="flex lg:hidden items-center justify-between mb-8">
           <div className="text-lg font-serif font-bold tracking-widest text-slate-900">
-            LUMINA<span className="text-amber-500">.</span>
+            Royal Crest<span className="text-amber-500">.</span>
           </div>
           <button
             onClick={() => setIsSidebarOpen(true)}

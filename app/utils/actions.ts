@@ -4,6 +4,7 @@ import * as bcrypt from "bcryptjs"
 import UserModel from "@/models/user"
 import { cookies } from "next/headers"
 import { encrypt,decrypt } from "./session"
+import { redirect } from "next/navigation"
 
 export const signUp = async (userData: {
   firstname: string;
@@ -83,6 +84,17 @@ export const signIn=async(LogData:{email:string, password:string})=>{
     };
   }
 }
+
+export const logout = async () => {
+  try {
+    const cookieStore = await cookies();
+    cookieStore.delete("token");
+    return { success: true,message:"logout Successful" };
+  } catch (error) {
+    return { success: true, message: "Something went wrong" };
+  }
+};
+
 
 const nodemailer = require("nodemailer");
 require("dotenv").config();

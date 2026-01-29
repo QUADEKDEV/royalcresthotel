@@ -4,9 +4,10 @@ export interface IUser {
   firstname: string;
   lastname: string;
   email: string;
-  phone:string;
+  phone: string;
   password: string;
-  isAdmin:boolean;
+  isAdmin: boolean;
+  role: "admin" | "staff" | "guest";
 }
 
 const UserSchema = new Schema<IUser>(
@@ -16,7 +17,7 @@ const UserSchema = new Schema<IUser>(
     email: { type: String, required: true, unique: true },
     phone: { type: String, required: true },
     password: { type: String, required: true, select: false },
-    isAdmin: { type: Boolean, required: true, default: false },
+    role: {type: String,enum: ["admin", "staff", "guest"],default: "guest",},
   },
   { timestamps: true },
 );
