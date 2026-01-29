@@ -2,25 +2,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { logout } from "../utils/actions";
-import {
-  LayoutDashboard,
-  Plus,
-  BedDouble,
-  DollarSign,
-  Tag,
-  Maximize,
-  Users,
-  Image as ImageIcon,
-  Save,
-  Trash2,
-  X,
-  Search,
-  ChevronRight,
-  TrendingUp,
-  CheckCircle2,
-  AlertCircle,
-  Menu,
-  LogOut,
+import { addRoom } from "../utils/actions";
+import {LayoutDashboard,Plus,BedDouble,DollarSign,
+  Tag,Maximize,Users,Image as ImageIcon,Save,Trash2,X,Search,ChevronRight,TrendingUp,CheckCircle2,AlertCircle,Menu,LogOut,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { redirect } from "next/dist/server/api-utils";
@@ -53,17 +37,18 @@ const initialRooms = [
   },
 ];
 
-export default function AdminDashboard() {
+export default function AdminDashboard()
+ {
   const [rooms, setRooms] = useState(initialRooms);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "",
-    price: "",
-    category: "Classic",
-    guests: "2",
-    size: "",
-    description: "",
+    name: "1",
+    price: "1",
+    description: "1",
+    capacity: "1",
+    size: "1",
+    image: "1",
   });
 const handleLogout=async()=>{
   const response=await logout();
@@ -73,26 +58,20 @@ const handleLogout=async()=>{
   toast.success(response.message)
   window.location.href = "/login"
 }
-  const handleAddRoom = (e: React.FormEvent) => {
+
+  const handleAddRoom = async (e: React.FormEvent) => {
     e.preventDefault();
-    const roomToAdd = {
-      id: Date.now(),
-      ...newRoom,
-      price: Number(newRoom.price),
-      status: "Available",
-      guests: Number(newRoom.guests),
-    };
-    setRooms([roomToAdd, ...rooms]);
+    const response = await addRoom(newRoom)
+
+    if (response?.status==false) {
+      toast.error(response?.message||"error");
+      return;
+    }
+
+    toast.success(response?.message||"success");
     setIsModalOpen(false);
-    setNewRoom({
-      name: "",
-      price: "",
-      category: "Classic",
-      guests: "2",
-      size: "",
-      description: "",
-    });
   };
+
 
   const deleteRoom = (id: number) => {
     setRooms(rooms.filter((room) => room.id !== id));
@@ -398,7 +377,7 @@ const handleLogout=async()=>{
 
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
-                    Nightly Rate (USD)
+                    Nightly Rate (NGN)
                   </label>
                   <div className="relative">
                     <DollarSign
@@ -429,7 +408,7 @@ const handleLogout=async()=>{
                     <select
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-amber-500/20 appearance-none text-sm sm:text-base"
                       onChange={(e) =>
-                        setNewRoom({ ...newRoom, category: e.target.value })
+                        setNewRoom({ ...newRoom, description: e.target.value })
                       }
                     >
                       <option>Classic</option>
@@ -454,7 +433,7 @@ const handleLogout=async()=>{
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
                       defaultValue="2"
                       onChange={(e) =>
-                        setNewRoom({ ...newRoom, guests: e.target.value })
+                        setNewRoom({ ...newRoom, capacity: e.target.value })
                       }
                     />
                   </div>

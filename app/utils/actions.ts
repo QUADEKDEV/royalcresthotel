@@ -5,6 +5,9 @@ import UserModel from "@/models/user"
 import { cookies } from "next/headers"
 import { encrypt,decrypt } from "./session"
 import { redirect } from "next/navigation"
+import RoomModel from "@/models/room"
+import { MongooseError } from "mongoose"
+import { revalidatePath } from "next/cache"
 
 export const signUp = async (userData: {
   firstname: string;
@@ -94,6 +97,44 @@ export const logout = async () => {
     return { success: true, message: "Something went wrong" };
   }
 };
+
+interface form{
+name: string;
+description: string;
+price: string;
+capacity: string;
+size: string;
+image: string;}
+
+export const addRoom = async (form:form) => {
+  try {
+    await dbConnect();
+    const isExisting = await RoomModel.findOne({ name: form.name });
+
+    if (isExisting) {
+      return {
+        status: false,
+        message: "A product with this title already exist",
+      };
+    }
+
+    const post = await RoomModel.create(form);
+    revalidatePath("/admindashboard");
+  } catch (error) {
+    if (error instanceof MongooseError && (error as any).code == 11000) {
+      return {
+        status: false,
+        message: "A room with this title already exist",
+      };
+    }
+    return {
+      status: false,
+      message:"something went wrong",
+      
+    };
+  }
+};
+
 
 
 const nodemailer = require("nodemailer");

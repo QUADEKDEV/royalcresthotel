@@ -12,47 +12,15 @@ export interface IRoom extends Document {
 
 const RoomSchema = new Schema<IRoom>(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
-    description: {
-      type: String,
-      required: true,
-    },
-
-    price: {
-      type: Number,
-      required: true,
-    },
-
-    capacity: {
-      type: Number,
-      required: true,
-    },
-
-    size: {
-      type: String,
-      required: true,
-    },
-
-    image: {
-      type: String,
-      required: true,
-    },
-
-    amenities: {
-      type: [String],
-      default: [],
-    },
+    name: { type: String, required: true, trim: true },
+    description: {type: String,required: true,},
+    price: {type: Number,required: true,},
+    capacity: {type: Number,required: true,},
+    size: {type: String,required: true,},
+    image: {type: String,required: true,},
+    amenities: {type: [String],default: [],},
   },
-  {
-    timestamps: true,
-  },
+  {timestamps: true,},
 );
-
 const RoomModel = models.Room || model<IRoom>("Room", RoomSchema);
-
 export default RoomModel;

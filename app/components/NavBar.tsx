@@ -43,7 +43,7 @@ const NavBar = () => {
               About Us
             </a>
             <button className="bg-slate-900 text-white px-6 py-2 rounded-full hover:bg-slate-800 transition-all">
-              Book Now
+              Sign In
             </button>
           </div>
           <button
