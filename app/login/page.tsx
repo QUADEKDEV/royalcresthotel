@@ -24,10 +24,10 @@ export default function LoginPage() {
     setError("");
     let response = await signIn({email,password});
     if (!response.success) {
-       setError(response.message);
+       setError(response.message as string);
        setIsLoading(false);
     } else {
-      toast.success(response.message);
+      toast.success(response.message as string);
         window.location.href = '/admindashboard';
       // route.push("/admindashboard");
     }
