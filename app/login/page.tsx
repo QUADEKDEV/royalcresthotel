@@ -18,20 +18,53 @@ export default function LoginPage() {
 
 
 
-  const handleLogin =async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-    let response = await signIn({email,password});
+  // const handleLogin =async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   setError("");
+  //   let response = await signIn({email,password});
+  //   if (!response.success) {
+  //      setError(response.message as string);
+  //      setIsLoading(false);
+  //   } else {
+  //     toast.success(response.message as string);
+  //       window.location.href = '/admindashboard';
+  //     // route.push("/admindashboard");
+  //   }
+  // };
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setError("");
+
+  try {
+    const response = await signIn({ email, password });
+
     if (!response.success) {
-       setError(response.message as string);
-       setIsLoading(false);
-    } else {
-      toast.success(response.message as string);
-        window.location.href = '/admindashboard';
-      // route.push("/admindashboard");
+      const msg =
+        typeof response.message === "string"
+          ? response.message
+          : "Login failed";
+
+      setError(msg);
+      toast.error(msg);
+      setIsLoading(false);
+      return;
     }
-  };
+
+    toast.success(
+      typeof response.message === "string"
+        ? response.message
+        : "Login successful",
+    );
+
+    window.location.href = "/admindashboard";
+  } catch (err) {
+    toast.error("Something went wrong");
+    setError("Something went wrong");
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-900 flex font-sans selection:bg-amber-500 selection:text-white">
