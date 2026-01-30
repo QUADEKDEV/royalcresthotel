@@ -43,15 +43,15 @@ export default function AdminDashboard()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "",
-    price: "",
-    description: "",
-    capacity: "",
-    size: "",
-    image: "",
-    roomNumber:"",
-    category:"",
-    amenities:[""],
+    name: "1",
+    price: "1",
+    description: "1",
+    capacity: "1",
+    size: "1",
+    image: "1",
+    roomNumber:"1",
+    category:"1",
+    amenities:["1"],
   });
 const handleLogout=async()=>{
   const response=await logout();
