@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { logout,addRoom } from "../utils/actions";
+import { logout, addRoom } from "../utils/actions";
 import {
   LayoutDashboard,
   Plus,
@@ -41,13 +41,13 @@ export default function AdminDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "0",
-    price: "0",
-    description: "0",
-    capacity: "0",
-    size: "0",
-    image: "0",
-    roomNumber: "0",
+    name: "",
+    price: "",
+    description: "",
+    capacity: "2",
+    size: "",
+    image: "",
+    roomNumber: "",
     category: "Classic",
     amenities: ["king size bed"],
   });
