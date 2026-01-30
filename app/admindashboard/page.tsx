@@ -27,9 +27,9 @@ export default function AdminDashboard()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "1",price: "1",description: "1",capacity: "1",size: "1",image: "1",roomNumber:"1",category:"1",amenities:["1"],
+    name: "",price: "",description: "",capacity: "",size: "",image: "",roomNumber:"",category:"",amenities:["1"],
   });
-  
+
 const handleLogout=async()=>{
   const response=await logout();
   if (!response){
@@ -368,7 +368,7 @@ const handleLogout=async()=>{
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
                       placeholder="e.g. Presidential Horizon Suite"
                       onChange={(e) =>
-                        setNewRoom({ ...newRoom, name: e.target.value })
+                        setNewRoom({ ...newRoom, description: e.target.value })
                       }
                     />
                   </div>
@@ -406,7 +406,7 @@ const handleLogout=async()=>{
                     <select
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-amber-500/20 appearance-none text-sm sm:text-base"
                       onChange={(e) =>
-                        setNewRoom({ ...newRoom, description: e.target.value })
+                        setNewRoom({ ...newRoom, category: e.target.value })
                       }
                     >
                       <option>Classic</option>
