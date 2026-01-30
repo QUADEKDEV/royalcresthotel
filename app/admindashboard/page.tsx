@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { logout } from "../utils/actions";
 import { addRoom } from "../utils/actions";
-import {LayoutDashboard,Plus,BedDouble,DollarSign,
+import {LayoutDashboard,Plus,BedDouble,
   Tag,Maximize,Users,Image as ImageIcon,Save,Trash2,X,Search,ChevronRight,TrendingUp,CheckCircle2,AlertCircle,Menu,LogOut,
 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -27,7 +27,7 @@ export default function AdminDashboard()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "1",price: "1",description: "1",capacity: "1",size: "1",image: "1",roomNumber:"1",category:"1",amenities:["1"],
+    name: "",price: "",description: "",capacity: "",size: "",image: "",roomNumber:"1",category:"",amenities:["1"],
   });
 
 const handleLogout=async()=>{
@@ -47,8 +47,8 @@ const handleLogout=async()=>{
       toast.error(response?.message||"error");
       return;
     }
-
     toast.success(response?.message||"success");
+
     setIsModalOpen(false);
   };
 
@@ -378,10 +378,9 @@ const handleLogout=async()=>{
                     Nightly Rate (NGN)
                   </label>
                   <div className="relative">
-                    <DollarSign
-                      className="absolute left-4 top-3.5 text-slate-300"
-                      size={18}
-                    />
+                    <span className="absolute left-4 top-3.5 text-slate-300">
+                      ₦
+                    </span>
                     <input
                       type="number"
                       required
@@ -455,9 +454,6 @@ const handleLogout=async()=>{
                     />
                   </div>
                 </div>
-
-
-
 
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
