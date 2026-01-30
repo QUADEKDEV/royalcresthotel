@@ -49,7 +49,7 @@ export default function AdminDashboard() {
     image: "",
     roomNumber: "",
     category: "Classic",
-    amenities: [""],
+    amenities: ["king size bed"],
   });
 
   const handleLogout = async () => {
