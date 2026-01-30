@@ -19,22 +19,6 @@ const initialRooms = [
     status: "Available",
     guests: 4,
   },
-  {
-    id: 2,
-    name: "Azure Garden Suite",
-    price: 750,
-    category: "Classic",
-    status: "Occupied",
-    guests: 2,
-  },
-  {
-    id: 3,
-    name: "Sanctuary Spa Villa",
-    price: 980,
-    category: "Wellness",
-    status: "Available",
-    guests: 2,
-  },
 ];
 
 export default function AdminDashboard()
@@ -43,16 +27,9 @@ export default function AdminDashboard()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "1",
-    price: "1",
-    description: "1",
-    capacity: "1",
-    size: "1",
-    image: "1",
-    roomNumber:"1",
-    category:"1",
-    amenities:["1"],
+    name: "1",price: "1",description: "1",capacity: "1",size: "1",image: "1",roomNumber:"1",category:"1",amenities:["1"],
   });
+  
 const handleLogout=async()=>{
   const response=await logout();
   if (!response){
