@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { logout } from "../utils/actions";
-import { addRoom } from "../utils/actions";
+import { logout,addRoom } from "../utils/actions";
 import {
   LayoutDashboard,
   Plus,
@@ -24,7 +23,6 @@ import {
   Camera,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { redirect } from "next/dist/server/api-utils";
 
 // Mock initial data
 const initialRooms = [
@@ -51,7 +49,7 @@ export default function AdminDashboard() {
     image: "",
     roomNumber: "",
     category: "",
-    amenities: ["1"],
+    amenities: [],
   });
 
   const handleLogout = async () => {
@@ -292,7 +290,7 @@ export default function AdminDashboard() {
                       </span>
                     </td>
                     <td className="px-6 py-4 font-mono font-bold text-slate-700">
-                      ${room.price}
+                      ₦{room.price}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">

@@ -113,7 +113,7 @@ amenities:string[];
 export const addRoom = async (form:form) => {
   try {
     await dbConnect();
-    const isExisting = await RoomModel.findOne({ name: form.category,roomNumber:form.roomNumber});
+    const isExisting = await RoomModel.findOne({ category: form.category,roomNumber:form.roomNumber});
 
     if (isExisting) {
       return {
