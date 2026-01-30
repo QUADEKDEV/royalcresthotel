@@ -3,8 +3,25 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { logout } from "../utils/actions";
 import { addRoom } from "../utils/actions";
-import {LayoutDashboard,Plus,BedDouble,
-  Tag,Maximize,Users,Image as ImageIcon,Save,Trash2,X,Search,ChevronRight,TrendingUp,CheckCircle2,AlertCircle,Menu,LogOut,
+import {
+  LayoutDashboard,
+  Plus,
+  BedDouble,
+  Tag,
+  Maximize,
+  Users,
+  Image as ImageIcon,
+  Save,
+  Trash2,
+  X,
+  Search,
+  ChevronRight,
+  TrendingUp,
+  CheckCircle2,
+  AlertCircle,
+  Menu,
+  LogOut,
+  Camera,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { redirect } from "next/dist/server/api-utils";
@@ -21,37 +38,43 @@ const initialRooms = [
   },
 ];
 
-export default function AdminDashboard()
- {
+export default function AdminDashboard() {
   const [rooms, setRooms] = useState(initialRooms);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "",price: "",description: "",capacity: "",size: "",image: "",roomNumber:"",category:"",amenities:["1"],
+    name: "",
+    price: "",
+    description: "",
+    capacity: "",
+    size: "",
+    image: "",
+    roomNumber: "",
+    category: "",
+    amenities: ["1"],
   });
 
-const handleLogout=async()=>{
-  const response=await logout();
-  if (!response){
-    toast.error("Something went wrong")
-  }
-  toast.success(response.message)
-  window.location.href = "/login"
-}
+  const handleLogout = async () => {
+    const response = await logout();
+    if (!response) {
+      toast.error("Something went wrong");
+    }
+    toast.success(response.message);
+    window.location.href = "/login";
+  };
 
   const handleAddRoom = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await addRoom(newRoom)
+    const response = await addRoom(newRoom);
 
-    if (response?.status==false) {
-      toast.error(response?.message||"error");
+    if (response?.status == false) {
+      toast.error(response?.message || "error");
       return;
     }
-    toast.success(response?.message||"success");
+    toast.success(response?.message || "success");
 
     setIsModalOpen(false);
   };
-
 
   const deleteRoom = (id: number) => {
     setRooms(rooms.filter((room) => room.id !== id));
@@ -100,7 +123,8 @@ const handleLogout=async()=>{
         </p>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium text-white">Alexander Vance</p>
-          <LogOut onClick={handleLogout}
+          <LogOut
+            onClick={handleLogout}
             size={14}
             className="text-slate-500 cursor-pointer hover:text-white"
           />
@@ -467,7 +491,7 @@ const handleLogout=async()=>{
                     <input
                       type="number"
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
-                      defaultValue="2"
+                      placeholder="e.g. 2"
                       onChange={(e) =>
                         setNewRoom({ ...newRoom, roomNumber: e.target.value })
                       }
@@ -479,13 +503,13 @@ const handleLogout=async()=>{
                     Image
                   </label>
                   <div className="relative">
-                    <Maximize
+                    <Camera
                       className="absolute left-4 top-3.5 text-slate-300"
                       size={18}
                     />
                     <input
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
-                      placeholder="e.g. 120"
+                      placeholder="image link"
                       onChange={(e) =>
                         setNewRoom({ ...newRoom, image: e.target.value })
                       }
