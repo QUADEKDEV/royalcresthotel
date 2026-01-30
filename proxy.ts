@@ -1,6 +1,8 @@
 import { NextRequest,ProxyConfig,NextResponse } from "next/server";
 import { auth } from "./app/utils/session";
 
+
+
 export default async function proxy(req: NextRequest) {
 
   const { success } = await auth();
