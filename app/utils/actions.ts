@@ -8,6 +8,7 @@ import { redirect } from "next/navigation"
 import RoomModel from "@/models/room"
 import { MongooseError } from "mongoose"
 import { revalidatePath } from "next/cache"
+import { MongoServerError } from "mongodb";
 
 export const signUp = async (userData: {
   firstname: string;
