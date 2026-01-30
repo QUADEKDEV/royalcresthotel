@@ -100,21 +100,23 @@ export const logout = async () => {
 
 interface form{
 name: string;
+roomNumber:string;
 description: string;
 price: string;
 capacity: string;
+category:string;
 size: string;
 image: string;}
 
 export const addRoom = async (form:form) => {
   try {
     await dbConnect();
-    const isExisting = await RoomModel.findOne({ name: form.name });
+    const isExisting = await RoomModel.findOne({ name: form.category,roomNumber:form.roomNumber});
 
     if (isExisting) {
       return {
         status: false,
-        message: "A product with this title already exist",
+        message: "A room with this name and number already exist",
       };
     }
 

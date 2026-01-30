@@ -49,6 +49,8 @@ export default function AdminDashboard()
     capacity: "1",
     size: "1",
     image: "1",
+    roomNumber:"1",
+    category:"Penthouse"
   });
 const handleLogout=async()=>{
   const response=await logout();
