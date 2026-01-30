@@ -356,7 +356,7 @@ const handleLogout=async()=>{
 
               <form
                 onSubmit={handleAddRoom}
-                className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[70vh] overflow-y-auto md:overflow-visible"
+                className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[80vh] overflow-y-auto md:overflow-visible"
               >
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
