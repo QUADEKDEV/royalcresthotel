@@ -390,7 +390,7 @@ export default function AdminDashboard() {
                     <input
                       required
                       className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
-                      placeholder="e.g. Presidential Horizon Suite"
+                      placeholder="e.g. Designed for royalty"
                       onChange={(e) =>
                         setNewRoom({ ...newRoom, description: e.target.value })
                       }
