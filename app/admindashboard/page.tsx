@@ -43,14 +43,15 @@ export default function AdminDashboard()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "1",
-    price: "1",
-    description: "1",
-    capacity: "1",
-    size: "1",
-    image: "1",
-    roomNumber:"1",
-    category:"Penthouse"
+    name: "",
+    price: "",
+    description: "",
+    capacity: "",
+    size: "",
+    image: "",
+    roomNumber:"",
+    category:"",
+    amenities:[""],
   });
 const handleLogout=async()=>{
   const response=await logout();
@@ -376,7 +377,25 @@ const handleLogout=async()=>{
                     />
                   </div>
                 </div>
-
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
+                    Description
+                  </label>
+                  <div className="relative">
+                    <BedDouble
+                      className="absolute left-4 top-3.5 text-slate-300"
+                      size={18}
+                    />
+                    <input
+                      required
+                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
+                      placeholder="e.g. Presidential Horizon Suite"
+                      onChange={(e) =>
+                        setNewRoom({ ...newRoom, name: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
                     Nightly Rate (NGN)
@@ -459,6 +478,48 @@ const handleLogout=async()=>{
                     />
                   </div>
                 </div>
+
+
+
+
+                <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
+                    Image
+                  </label>
+                  <div className="relative">
+                    <Users
+                      className="absolute left-4 top-3.5 text-slate-300"
+                      size={18}
+                    />
+                    <input
+                      type="number"
+                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
+                      defaultValue="2"
+                      onChange={(e) =>
+                        setNewRoom({ ...newRoom, image: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+
+                {/* <div className="space-y-2">
+                  <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
+                    Amenities
+                  </label>
+                  <div className="relative">
+                    <Maximize
+                      className="absolute left-4 top-3.5 text-slate-300"
+                      size={18}
+                    />
+                    <input
+                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
+                      placeholder="e.g. 120"
+                      onChange={(e) =>
+                        setNewRoom({ ...newRoom, amenities: e.target.value })
+                      }
+                    />
+                  </div>
+                </div> */}
 
                 <div className="md:col-span-2 pt-4">
                   <button

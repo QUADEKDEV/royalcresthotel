@@ -106,7 +106,9 @@ price: string;
 capacity: string;
 category:string;
 size: string;
-image: string;}
+image: string;
+amenities:string[];
+}
 
 export const addRoom = async (form:form) => {
   try {
