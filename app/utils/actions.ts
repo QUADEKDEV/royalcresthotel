@@ -113,7 +113,7 @@ amenities:string[];
 export const addRoom = async (form:form) => {
   try {
     await dbConnect();
-    const isExisting = await RoomModel.findOne({ category: form.category,roomNumber:form.roomNumber});
+    const isExisting = await RoomModel.findOne({ name: form.name,roomNumber:form.roomNumber});
 
     if (isExisting) {
       return {
@@ -124,11 +124,17 @@ export const addRoom = async (form:form) => {
 
     const post = await RoomModel.create(form);
     revalidatePath("/admindashboard");
+    return {
+      status: true,
+      message: "Room added successfully",
+      room: post,
+    };
   } catch (error) {
-    if (error instanceof MongooseError && (error as any).code == 11000) {
+
+    if (error instanceof MongoServerError && error.code === 11000) {
       return {
         status: false,
-        message: "A room with this title already exist",
+        message: "Room with this name and number already exists",
       };
     }
     return {
