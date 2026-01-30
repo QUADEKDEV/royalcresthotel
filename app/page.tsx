@@ -68,71 +68,7 @@ const ROOMS: Room[] = [
       "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1974&auto=format&fit=crop",
     amenities: ["City View", "Jacuzzi", "Smart Home", "King Bed"],
   },
-  {
-    id: "4",
-    name: "Alpine Timber Loft",
-    description:
-      "A cozy retreat featuring exposed wooden beams, a stone fireplace, and views of the misty peaks.",
-    price: 95000,
-    capacity: 3,
-    size: "70m²",
-    image:
-      "https://images.unsplash.com/photo-1518733057094-95b53143d2a7?q=80&w=2065&auto=format&fit=crop",
-    amenities: ["Mountain View", "Fireplace", "Hot Chocolate Bar", "Queen Bed"],
-  },
-  {
-    id: "5",
-    name: "Zen Garden Studio",
-    description:
-      "Minimalist Japanese design with tatami mats, shoji screens, and a private stone garden for meditation.",
-    price: 75000,
-    capacity: 2,
-    size: "50m²",
-    image:
-      "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=2070&auto=format&fit=crop",
-    amenities: [
-      "Private Garden",
-      "Meditation Area",
-      "Soaking Tub",
-      "Futon Bed",
-    ],
-  },
-  {
-    id: "6",
-    name: "The Grand Ballroom Suite",
-    description:
-      "Designed for royalty, featuring crystal chandeliers, a grand piano, and an expansive dining hall.",
-    price: 350000,
-    capacity: 6,
-    size: "200m²",
-    image:
-      "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=2070&auto=format&fit=crop",
-    amenities: ["Grand Piano", "Dining Hall", "Chauffeur", "3 Bedrooms"],
-  },
-  {
-    id: "7",
-    name: "Lagoon Overwater Villa",
-    description:
-      "Direct access to turquoise waters from your private deck. Glass floor panels reveal marine life below.",
-    price: 180000,
-    capacity: 2,
-    size: "90m²",
-    image:
-      "https://images.unsplash.com/photo-1439130490301-25e322d88054?q=80&w=2064&auto=format&fit=crop",
-    amenities: ["Ocean Access", "Glass Floor", "Outdoor Shower", "King Bed"],
-  },
-  {
-    id: "8",
-    name: "Safari Sunset Lodge",
-    description:
-      "Experience the wild in comfort. Canvas walls, teak furniture, and a telescope for starry nights.",
-    price: 110000,
-    capacity: 2,
-    size: "65m²",
-    image:
-      "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2070&auto=format&fit=crop",
-    amenities: ["Safari View", "Telescope", "Outdoor Bath", "Queen Bed"],
-  },
+  
 ];
 
 // --- Components ---
