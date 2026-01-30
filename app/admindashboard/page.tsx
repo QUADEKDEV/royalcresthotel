@@ -41,13 +41,13 @@ export default function AdminDashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
-    name: "0",
-    price: "0",
-    description: "0",
-    capacity: "0",
-    size: "0",
-    image: "0",
-    roomNumber: "0",
+    name: "",
+    price: "",
+    description: "",
+    capacity: "",
+    size: "",
+    image: "",
+    roomNumber: "",
     category: "Classic",
     amenities: ["king size bed"],
   });
