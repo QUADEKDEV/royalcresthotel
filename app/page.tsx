@@ -1,6 +1,3 @@
-"use client"
-import React, { useState} from "react";
-// import NavBar from "./components/NavBar";
 import LandingNav from "./components/LandingNav"
 import Footer from "./components/Footer";
 import { fetchroom } from "./utils/actions";
@@ -9,6 +6,7 @@ import RoomCard from "./components/RoomCard";
 import PaymentModal from "./components/PaymentModal";
 import {AnimatePresence } from "framer-motion";
 import Dining from "./components/Dining";
+import { handleBook } from "./components/RoomCard";
 // --- Types ---
 interface Room {
   id: string;
@@ -64,13 +62,7 @@ interface Room {
 ];
 
 export default function App() {
-  // const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const handleBook = (room: Room) => {
-  //   setSelectedRoom(room);
-  //   setIsModalOpen(true);
-  // };
+  
 
   const handleScrollToRooms = () => {
     const el = document.getElementById("suites");
@@ -97,7 +89,7 @@ export default function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ROOMS.map((room) => (
-            <RoomCard key={room.id} room={room} /*onBook={handleBook}*/ />
+            <RoomCard key={room.id} room={room} onBook={handleBook}/>
           ))}
         </div>
       </section>
