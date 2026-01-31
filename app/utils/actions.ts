@@ -102,7 +102,7 @@ export const logout = async () => {
 
 
 
-  export const payWithPaystack = () => {
+  export const payWithPaystack =async () => {
     const handler = (window as any).PaystackPop.setup({
       key: "pk_test_xxxxx",
       email: "customer@email.com",
