@@ -69,8 +69,7 @@ const RoomCard = ({
               ₦{room.price.toLocaleString()}
             </p>
           </div>
-          <button
-            // onClick={() => onBook(room)}
+          <button  onClick={() => (window.location.href = `/booking/${room.price}`)}
             className="bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors"
           >
             Book Now
