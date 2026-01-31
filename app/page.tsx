@@ -64,15 +64,12 @@ interface Room {
 export default function App() {
   
 
-  const handleScrollToRooms = () => {
-    const el = document.getElementById("suites");
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+ 
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
       <LandingNav/>
-      <Hero onExplore={handleScrollToRooms} />
+      <Hero/>
       <section id="suites" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-amber-500 font-medium tracking-widest uppercase text-sm">
