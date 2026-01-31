@@ -103,7 +103,7 @@ export default function App() {
           ))}
         </div>
       </section>
-      
+      <Dining/>
       <Footer />
       {/* Logic Modal */}
       <AnimatePresence>
