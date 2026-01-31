@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import NavBar from "./components/NavBar";
+// import NavBar from "./components/NavBar";
+import LandingNav from "./components/LandingNav"
 import Footer from "./components/Footer";
 import { fetchroom } from "./utils/actions";
 
@@ -35,7 +36,7 @@ interface Room {
 
 // --- Mock Data ---
 
-//  const ROOMS: Room[]  = await fetchroom();
+//  const ROOMS = await fetchroom();
  const ROOMS: Room[] = [
   {
     id: "1",
@@ -77,93 +78,7 @@ interface Room {
 ];
 
 // --- Components ---
-// const Navbar = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
-//   const [scrolled, setScrolled] = useState(false);
-//   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-//   useEffect(() => {
-//     const handleScroll = () => setScrolled(window.scrollY > 50);
-//     window.addEventListener("scroll", handleScroll);
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-//   return (
-//     <nav
-//       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-//         scrolled
-//           ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
-//           : "bg-transparent py-6"
-//       }`}
-//     >
-//       <div className="container mx-auto px-6 flex items-center justify-between">
-//         <div
-//           className={`text-2xl font-serif font-bold tracking-tighter ${
-//             scrolled ? "text-slate-900" : "text-white"
-//           }`}
-//         >
-//           Royal Crest Hotel<span className="text-amber-500">.</span>
-//         </div>
-
-//         {/* Desktop Links */}
-//         <div
-//           className={`hidden md:flex items-center space-x-8 font-medium ${
-//             scrolled ? "text-slate-600" : "text-white/90"
-//           }`}
-//         >
-//           <a href="#" className="hover:text-amber-500 transition-colors">
-//             Suites
-//           </a>
-//           <a href="#" className="hover:text-amber-500 transition-colors">
-//             Dining
-//           </a>
-//           <a href="#" className="hover:text-amber-500 transition-colors">
-//             Experiences
-//           </a>
-     
-//           <button
-//             className={`px-6 py-2 rounded-full transition-all ${
-//               scrolled
-//                 ? "bg-slate-900 text-white hover:bg-slate-800"
-//                 : "bg-white text-slate-900 hover:bg-slate-100"
-//             }`}
-//           >
-//             Sign In
-//           </button>
-//         </div>
-
-//         {/* Mobile Toggle */}
-//         <button
-//           className="md:hidden text-2xl"
-//           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-//         >
-//           {mobileMenuOpen ? (
-//             <X className={scrolled ? "text-slate-900" : "text-white"} />
-//           ) : (
-//             <Menu className={scrolled ? "text-slate-900" : "text-white"} />
-//           )}
-//         </button>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       <AnimatePresence>
-//         {mobileMenuOpen && (
-//           <motion.div
-//             initial={{ opacity: 0, height: 0 }}
-//             animate={{ opacity: 1, height: "auto" }}
-//             exit={{ opacity: 0, height: 0 }}
-//             className="md:hidden bg-white border-t"
-//           >
-//             <div className="flex flex-col p-6 space-y-4 text-slate-900 font-medium">
-//               <a href="#">Suites</a>
-//               <a href="#">Dining</a>
-//               <a href="#">Experiences</a>
-//             </div>
-//           </motion.div>
-//         )}
-//       </AnimatePresence>
-//     </nav>
-//   );
-// };
 
 const Hero = ({ onExplore }: { onExplore: () => void }) => {
   return (
@@ -505,10 +420,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
+      <LandingNav onOpenBooking={handleScrollToRooms}/>
       {/* <Navbar onOpenBooking={handleScrollToRooms} /> */}
-
       <Hero onExplore={handleScrollToRooms} />
-
       <section id="suites" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-amber-500 font-medium tracking-widest uppercase text-sm">
@@ -529,7 +443,6 @@ export default function App() {
           ))}
         </div>
       </section>
-
       <section className="bg-slate-900 text-white py-24 px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
@@ -564,8 +477,7 @@ export default function App() {
           </div>
         </div>
       </section>
-<Footer/>
-     
+      <Footer />
       {/* Logic Modal */}
       <AnimatePresence>
         {isModalOpen && (
