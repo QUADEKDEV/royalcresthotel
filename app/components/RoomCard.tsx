@@ -1,3 +1,4 @@
+"use client"
 import {MapPin,Users,}from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 

@@ -1,3 +1,4 @@
+"use client"
 import React, { useState,useEffect} from "react";
 import {Calendar,Check,X,CreditCard,Loader2,} from "lucide-react";
 import { motion} from "framer-motion";
