@@ -6,22 +6,8 @@ import { fetchroom } from "./utils/actions";
 import Hero from "./components/Hero";
 import RoomCard from "./components/RoomCard";
 import PaymentModal from "./components/PaymentModal";
-
-import {
-  Star,
-  Wifi,
-  Coffee,
-  MapPin,
-  Calendar,
-  Users,
-  Check,
-  ArrowRight,
-  Menu,
-  X,
-  CreditCard,
-  Loader2,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {Star,Coffee} from "lucide-react";
+import {AnimatePresence } from "framer-motion";
 
 // --- Types ---
 interface Room {
