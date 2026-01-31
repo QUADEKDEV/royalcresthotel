@@ -299,7 +299,7 @@ const PaymentModal = ({
   }, [isOpen]);
 
   const handlePay = () => {
-    payWithPaystack();
+    payWithPaystack()
     // if (!email) return;
     // setStep("processing");
 
