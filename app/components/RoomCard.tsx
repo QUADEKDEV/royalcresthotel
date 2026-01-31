@@ -14,19 +14,13 @@ interface Room {
   size: string;
   amenities: string[];
 }
-const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-const [isModalOpen, setIsModalOpen] = useState(false);
-
-export const handleBook = (room: Room) => {
-  setSelectedRoom(room);
-  setIsModalOpen(true);
-};
+// const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+// const [isModalOpen, setIsModalOpen] = useState(false);
 
 const RoomCard = ({
-  room ,onBook,
+  room
 }: {
-  room: Room; onBook: (r: Room) => void;
-}) => {
+  room: Room}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -86,7 +80,7 @@ const RoomCard = ({
             </p>
           </div>
           <button
-            onClick={() => onBook(room)}
+            // onClick={() => onBook(room)}
             className="bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors"
           >
             Book Now
