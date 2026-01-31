@@ -101,10 +101,10 @@ export const logout = async () => {
 
 
 
-
-  export const payWithPaystack =async () => {
+export const payWithPaystack=async()=> {
     const handler = (window as any).PaystackPop.setup({
-      key: "pk_test_xxxxx",
+      key: "pk_test_xxxxx"
+      ,
       email: "customer@email.com",
       amount: 500000,
       currency: "NGN",
