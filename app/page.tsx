@@ -35,7 +35,7 @@ interface Room {
 
 // --- Mock Data ---
 
- const ROOMS = await fetchroom();
+ const ROOMS  = await fetchroom();
 // const ROOMS: Room[] = [
 //   {
 //     id: "1",
