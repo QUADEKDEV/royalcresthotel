@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-import { payWithPaystack } from "./utils/actions";
+
 import {
   Star,
   Wifi,
@@ -297,6 +297,24 @@ const PaymentModal = ({
   useEffect(() => {
     if (isOpen) setStep("details");
   }, [isOpen]);
+
+
+const payWithPaystack=async()=> {
+    const handler = (window as any).PaystackPop.setup({
+      key: "pk_test_xxxxx"
+      ,
+      email: "customer@email.com",
+      amount: 500000,
+      currency: "NGN",
+      callback: function (response: any) {
+        alert("Payment successful: " + response.reference);
+      },
+    });
+
+    handler.openIframe();
+  };
+
+
 
   const handlePay = () => {
     payWithPaystack()
