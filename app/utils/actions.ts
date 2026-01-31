@@ -99,6 +99,23 @@ export const logout = async () => {
   }
 };
 
+
+
+
+  export const payWithPaystack = () => {
+    const handler = (window as any).PaystackPop.setup({
+      key: "pk_test_xxxxx",
+      email: "customer@email.com",
+      amount: 500000,
+      currency: "NGN",
+      callback: function (response: any) {
+        alert("Payment successful: " + response.reference);
+      },
+    });
+
+    handler.openIframe();
+  };
+
 interface form{
 name: string;
 roomNumber:string;

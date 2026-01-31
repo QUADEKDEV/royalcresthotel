@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import { payWithPaystack } from "./utils/actions";
 import {
   Star,
   Wifi,
@@ -298,13 +299,14 @@ const PaymentModal = ({
   }, [isOpen]);
 
   const handlePay = () => {
-    if (!email) return;
-    setStep("processing");
+    payWithPaystack();
+    // if (!email) return;
+    // setStep("processing");
 
-    // Simulate API Call to GraphQL -> Paystack
-    setTimeout(() => {
-      setStep("success");
-    }, 2500);
+    // // Simulate API Call to GraphQL -> Paystack
+    // setTimeout(() => {
+    //   setStep("success");
+    // }, 2500);
   };
 
   if (!isOpen || !room) return null;
