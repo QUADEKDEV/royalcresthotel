@@ -60,10 +60,6 @@ interface Room {
 // ];
 
 export default function App() {
-  
-
- 
-
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
       <LandingNav/>
