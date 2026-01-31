@@ -152,6 +152,27 @@ export const addRoom = async (form:form) => {
 
 
 
+
+
+
+export const fetchroom = async () => {
+  await dbConnect();
+  let rooms = await RoomModel.find();
+  const result = rooms.map((room) => ({
+    image: room.image,
+    price: room.price,
+    name: room.name,
+
+    description: room.description,
+    capacity: room.capacity,
+    size: room.size,
+    amenities: room.amenities,
+    id: room._id.toString(),
+  }));
+  return result;
+};
+
+
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
