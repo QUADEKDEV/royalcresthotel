@@ -5,60 +5,9 @@ import Hero from "./components/Hero";
 import RoomCard from "./components/RoomCard";
 import PaymentModal from "./components/PaymentModal";
 import Dining from "./components/Dining";
-// --- Types ---
-interface Room {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  capacity: number;
-  size: string;
-  amenities: string[];
-}
 
 
   const ROOMS = await fetchroom();
-//  const ROOMS: Room[] = [
-//   {
-//     id: "1",
-//     name: "The Royal Ocean Suite",
-//     description:
-//       "Experience unparalleled luxury with panoramic ocean views, a private infinity pool, and dedicated butler service.",
-//     price: 150000,
-//     capacity: 2,
-//     size: "85m²",
-//     image:
-//       "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop",
-//     amenities: ["Ocean View", "Private Pool", "Butler Service", "King Bed"],
-//   },
-//   {
-//     id: "2",
-//     name: "Executive Garden Villa",
-//     description:
-//       "Nestled in our tropical gardens, this villa offers tranquility, an outdoor rain shower, and spacious living areas.",
-//     price: 85000,
-//     capacity: 4,
-//     size: "120m²",
-//     image:
-//       "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=2025&auto=format&fit=crop",
-//     amenities: ["Garden View", "Rain Shower", "Living Room", "2 Queen Beds"],
-//   },
-//   {
-//     id: "3",
-//     name: "Skyline Penthouse",
-//     description:
-//       "Perched on the top floor, enjoy the city lights from your jacuzzi. Modern design meets ultimate comfort.",
-//     price: 200000,
-//     capacity: 2,
-//     size: "95m²",
-//     image:
-//       "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1974&auto=format&fit=crop",
-//     amenities: ["City View", "Jacuzzi", "Smart Home", "King Bed"],
-//   },
-  
-// ];
-
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
@@ -86,16 +35,6 @@ export default function App() {
       </section>
       <Dining />
       <Footer />
-      {/* Logic Modal */}
-      {/* <AnimatePresence>
-        {isModalOpen && (
-          <PaymentModal
-            room={selectedRoom}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-          />
-        )}
-      </AnimatePresence> */}
     </div>
   );
 }

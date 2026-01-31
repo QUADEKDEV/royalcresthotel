@@ -2,18 +2,8 @@
 import {MapPin,Users,}from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { Room } from "../utils/type";
 
-
-interface Room {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  capacity: number;
-  size: string;
-  amenities: string[];
-}
 // const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 // const [isModalOpen, setIsModalOpen] = useState(false);
 
