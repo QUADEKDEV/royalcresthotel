@@ -16,11 +16,9 @@ interface Room {
 
 
 const RoomCard = ({
-  room,
-  onBook,
+  room /*onBook,*/,
 }: {
-  room: Room;
-  onBook: (r: Room) => void;
+  room: Room; /*onBook: (r: Room) => void;*/
 }) => {
   return (
     <motion.div
@@ -81,7 +79,7 @@ const RoomCard = ({
             </p>
           </div>
           <button
-            onClick={() => onBook(room)}
+            /*onClick={() => onBook(room)}*/
             className="bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors"
           >
             Book Now

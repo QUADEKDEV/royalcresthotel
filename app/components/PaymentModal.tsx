@@ -212,6 +212,11 @@ const PaymentModal = ({
           )}
         </div>
       </motion.div>
+
+
+
+
+      
     </div>
   );
 };

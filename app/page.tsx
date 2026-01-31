@@ -22,8 +22,6 @@ interface Room {
 }
 
 
-// --- Mock Data ---
-
 //  const ROOMS = await fetchroom();
  const ROOMS: Room[] = [
   {
@@ -66,13 +64,13 @@ interface Room {
 ];
 
 export default function App() {
-  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleBook = (room: Room) => {
-    setSelectedRoom(room);
-    setIsModalOpen(true);
-  };
+  // const handleBook = (room: Room) => {
+  //   setSelectedRoom(room);
+  //   setIsModalOpen(true);
+  // };
 
   const handleScrollToRooms = () => {
     const el = document.getElementById("suites");
@@ -81,7 +79,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
-      <LandingNav onOpenBooking={handleScrollToRooms}/>
+      <LandingNav onOpenBooking={handleScrollToRooms} />
       <Hero onExplore={handleScrollToRooms} />
       <section id="suites" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
@@ -99,14 +97,14 @@ export default function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ROOMS.map((room) => (
-            <RoomCard key={room.id} room={room} onBook={handleBook} />
+            <RoomCard key={room.id} room={room} /*onBook={handleBook}*/ />
           ))}
         </div>
       </section>
-      <Dining/>
+      <Dining />
       <Footer />
       {/* Logic Modal */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isModalOpen && (
           <PaymentModal
             room={selectedRoom}
@@ -114,7 +112,7 @@ export default function App() {
             onClose={() => setIsModalOpen(false)}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   );
 }
