@@ -71,7 +71,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
-      <LandingNav onOpenBooking={handleScrollToRooms} />
+      <LandingNav/>
       <Hero onExplore={handleScrollToRooms} />
       <section id="suites" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">

@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 
 
-const LandingNav = ({ onOpenBooking }: { onOpenBooking: () => void }) => {
+const LandingNav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
