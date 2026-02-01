@@ -1,35 +1,44 @@
 "use client";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
+
 export default function BookingDates() {
   const [checkIn, setCheckIn] = useState<string>("");
   const [checkOut, setCheckOut] = useState<string>("");
   const [days, setDays] = useState<string[]>([]);
 
-  // today's date in YYYY-MM-DD format
   const today = new Date().toISOString().split("T")[0];
+
+  // format date → DD Month YYYY
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
 
   useEffect(() => {
     if (!checkIn || !checkOut) return;
+
     const start = new Date(checkIn);
     const end = new Date(checkOut);
     const now = new Date(today);
+
     if (start < now) {
-      toast.error("Check-in date cannot be earlier than today");
+      alert("Check-in date cannot be earlier than today");
       setCheckIn("");
       setDays([]);
       return;
     }
 
-    
     if (start > end) {
-      toast.error("Check-in date cannot be greater than check-out date");
+      alert("Check-in date cannot be greater than check-out date");
       setCheckOut("");
       setDays([]);
       return;
     }
 
-    // ✅ generate date array
     const dates: string[] = [];
     let current = new Date(start);
 
@@ -46,7 +55,7 @@ export default function BookingDates() {
       <input
         type="date"
         value={checkIn}
-        min={today} // ✅ prevents selecting past dates
+        min={today}
         onChange={(e) => setCheckIn(e.target.value)}
         className="border p-2"
       />
@@ -54,7 +63,7 @@ export default function BookingDates() {
       <input
         type="date"
         value={checkOut}
-        min={checkIn || today} // ✅ prevents invalid checkout
+        min={checkIn || today}
         onChange={(e) => setCheckOut(e.target.value)}
         className="border p-2"
       />
@@ -63,7 +72,7 @@ export default function BookingDates() {
         <strong>Days booked:</strong>
         <ul>
           {days.map((day, index) => (
-            <li key={index}>{day}</li>
+            <li key={index}>{formatDate(day)}</li>
           ))}
         </ul>
       </div>
