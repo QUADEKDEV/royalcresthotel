@@ -21,6 +21,7 @@ export default function UploadPage() {
 
       const data = await res.json();
       setImageUrl(data.url);
+       alert(data.url); 
     };
   };
 
@@ -33,7 +34,7 @@ export default function UploadPage() {
       />
 
       <button onClick={uploadImage}>Upload</button>
-      <button onClick={()=>alert(imageUrl)}>Upload</button>
+   
 
       {imageUrl && <img src={imageUrl} alt="Uploaded" width={300} />}
     </div>
