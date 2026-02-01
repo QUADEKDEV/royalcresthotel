@@ -4,6 +4,10 @@ import { Metadata } from "next";
 import Image from "next/image";
 import {Calendar} from "lucide-react";
 import BookingDates from "@/app/components/Bookingdate";
+import { createHistory } from "@/app/utils/actions";
+import toast from "react-hot-toast";
+import { getUser } from "@/app/utils/actions";
+
 
 
 type PageProps = {
@@ -11,6 +15,18 @@ type PageProps = {
     _id: string;
   };
 };
+
+const user= await getUser();
+try {
+  if (!user.success) {
+    toast.error("Please login in to continue");
+  }
+  const email = user.email;
+  toast.success(email)
+} catch (error) {
+  toast.error(user.message);
+}
+
 
 export const generateMetadata = async ({
   params,
@@ -65,7 +81,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
               ₦{room.price.toLocaleString()}
             </span>
           </div>
-          <BookingDates/>
+          <BookingDates />
           {/* <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -105,11 +121,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
 
 
 
-          <div className="mt-6 flex gap-4">
-            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full">
-              Confirm Reservation
-            </button>
-          </div>
+          
 
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2 text-gray-400">Room Features</h2>

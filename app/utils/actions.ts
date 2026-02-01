@@ -153,6 +153,47 @@ export const fetchroom = async () => {
   return result;
 };
 
+export const getUser = async () => {
+    await dbConnect()
+    try {
+        const cookieStore = await cookies()
+
+        const token = cookieStore.get("token")?.value;
+
+        if (!token) {
+            return {
+                success: false,
+                message: "Please Longin To continue"
+            }
+        }
+
+        const decrypted = await decrypt(token)
+
+        const user = await UserModel.findById({ _id: decrypted._id })
+
+        if (!user) {
+            return {
+                success: false,
+                message: "User not found"
+            }
+        }
+        return {
+            success: true,
+            message: "User found",
+            email:user.email,
+        }
+
+    } catch (error) {
+        return {
+            success: false,
+            message: "Something went wrong"
+        }
+    }
+}
+
+
+
+
 export const createHistory = async (history: {
   roomId: string;
   email: string;
