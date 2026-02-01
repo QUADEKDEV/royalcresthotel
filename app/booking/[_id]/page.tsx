@@ -64,11 +64,8 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
           </div>
 
           <div className="mt-6 flex gap-4">
-            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition">
-              Add to Cart
-            </button>
-            <button className="px-8 py-4 border border-gray-300 rounded-xl text-lg font-semibold hover:bg-gray-100 transition">
-              Wishlist
+            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full">
+              Confirm Reservation
             </button>
           </div>
 
