@@ -6,12 +6,25 @@ export default function BookingDates() {
   const [checkOut, setCheckOut] = useState<string>("");
   const [days, setDays] = useState<string[]>([]);
 
+  // today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split("T")[0];
+
   useEffect(() => {
     if (!checkIn || !checkOut) return;
 
     const start = new Date(checkIn);
     const end = new Date(checkOut);
+    const now = new Date(today);
 
+    // ❌ check-in cannot be before today
+    if (start < now) {
+      alert("Check-in date cannot be earlier than today");
+      setCheckIn("");
+      setDays([]);
+      return;
+    }
+
+    // ❌ check-in cannot be after check-out
     if (start > end) {
       alert("Check-in date cannot be greater than check-out date");
       setCheckOut("");
@@ -19,7 +32,8 @@ export default function BookingDates() {
       return;
     }
 
-    const dates: string[] = []; // ✅ declared properly
+    // ✅ generate date array
+    const dates: string[] = [];
     let current = new Date(start);
 
     while (current <= end) {
@@ -27,14 +41,15 @@ export default function BookingDates() {
       current.setDate(current.getDate() + 1);
     }
 
-    setDays(dates); // ✅ works
-  }, [checkIn, checkOut]);
+    setDays(dates);
+  }, [checkIn, checkOut, today]);
 
   return (
     <div className="space-y-4">
       <input
         type="date"
         value={checkIn}
+        min={today} // ✅ prevents selecting past dates
         onChange={(e) => setCheckIn(e.target.value)}
         className="border p-2"
       />
@@ -42,7 +57,7 @@ export default function BookingDates() {
       <input
         type="date"
         value={checkOut}
-        min={checkIn}
+        min={checkIn || today} // ✅ prevents invalid checkout
         onChange={(e) => setCheckOut(e.target.value)}
         className="border p-2"
       />

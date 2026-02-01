@@ -3,8 +3,6 @@ import {MapPin,Users,}from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Room } from "../utils/type";
 
-// const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
-// const [isModalOpen, setIsModalOpen] = useState(false);
 
 
 const RoomCard = ({

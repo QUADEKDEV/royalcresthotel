@@ -183,9 +183,7 @@ export const createHistory = async (history: {
 
 export const fetchHistory = async ({ id }: { id: string }) => {
   await dbConnect();
-
   const histories = await HistoryModel.find({ id });
-
   const result = histories.map((history) => ({
     roomId: history.roomId,
     email: history.email,
