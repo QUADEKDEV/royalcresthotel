@@ -10,6 +10,8 @@ import { MongooseError } from "mongoose"
 import { revalidatePath } from "next/cache"
 import { MongoServerError } from "mongodb";
 import { Types } from "mongoose";
+import { form } from "./type"
+import HistoryModel from "@/models/history"
 
 export const signUp = async (userData: {
   firstname: string;
@@ -100,22 +102,6 @@ export const logout = async () => {
   }
 };
 
-
-
-
-
-interface form{
-name: string;
-roomNumber:string;
-description: string;
-price: string;
-capacity: string;
-category:string;
-size: string;
-image: string;
-amenities:string[];
-}
-
 export const addRoom = async (form:form) => {
   try {
     await dbConnect();
@@ -151,11 +137,6 @@ export const addRoom = async (form:form) => {
   }
 };
 
-
-
-
-
-
 export const fetchroom = async () => {
   await dbConnect();
   let rooms = await RoomModel.find();
@@ -172,10 +153,51 @@ export const fetchroom = async () => {
   return result;
 };
 
+export const createHistory = async (history: {
+  roomId: string;
+  email: string;
+  days: string[];
+}) => {
+
+  try {
+    await dbConnect();
+    const result = await HistoryModel.create(history);
+    if (!result) {
+      return {
+        success: false,
+        message: "Something went Wrong",
+      };
+    }
+
+    return {
+      success: true,
+      message: "Room Reseved",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error,
+    };
+  }
+};
+
+export const fetchHistory = async ({ id }: { id: string }) => {
+  await dbConnect();
+
+  const histories = await HistoryModel.find({ id });
+
+  const result = histories.map((history) => ({
+    roomId: history.roomId,
+    email: history.email,
+    days: history.days,
+  }));
+
+  return result;
+};
+
 
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -183,7 +205,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.NODE_MAIL_PASS,
   },
 });
-
 export const sendMail = async (details: {
   fullName: string;
   eMail: string;
