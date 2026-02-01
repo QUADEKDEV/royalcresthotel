@@ -1,3 +1,4 @@
+"use client"
 import { dbConnect } from "@/app/utils/dbConnect";
 import RoomModel from "@/models/room";
 import { Metadata } from "next";
@@ -78,7 +79,6 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
                                 <input
                                   type="text"
                                   value="Oct 24, 2025"
-                                  readOnly
                                   className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
                                 />
                               </div>
@@ -95,7 +95,6 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
                                 <input
                                   type="text"
                                   value="Oct 26, 2025"
-                                  readOnly
                                   className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
                                 />
                               </div>
