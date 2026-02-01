@@ -33,6 +33,7 @@ export default function UploadPage() {
       />
 //wana check something
       <button onClick={uploadImage}>Upload</button>
+      <button onClick={()=>alert(imageUrl)} ></button>
 
       {imageUrl && <img src={imageUrl} alt="Uploaded" width={300} />}
     </div>
