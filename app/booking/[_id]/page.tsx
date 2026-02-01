@@ -89,7 +89,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
               ₦{room.price.toLocaleString()}
             </span>
           </div>
-          <BookingDates roomId={room._id.toString()} price={room.price}} />
+          <BookingDates roomId={room._id.toString()} price={room.price}/>
           {/* <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-slate-700 mb-1">
