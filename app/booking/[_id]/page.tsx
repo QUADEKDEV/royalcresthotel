@@ -2,6 +2,8 @@ import { dbConnect } from "@/app/utils/dbConnect";
 import RoomModel from "@/models/room";
 import { Metadata } from "next";
 import Image from "next/image";
+import {Calendar} from "lucide-react";
+
 
 type PageProps = {
   params: {
@@ -63,6 +65,47 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
             </span>
           </div>
 
+          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Check-in
+                              </label>
+                              <div className="relative">
+                                <Calendar
+                                  size={16}
+                                  className="absolute left-3 top-3.5 text-slate-400"
+                                />
+                                <input
+                                  type="text"
+                                  value="Oct 24, 2025"
+                                  readOnly
+                                  className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">
+                                Check-out
+                              </label>
+                              <div className="relative">
+                                <Calendar
+                                  size={16}
+                                  className="absolute left-3 top-3.5 text-slate-400"
+                                />
+                                <input
+                                  type="text"
+                                  value="Oct 26, 2025"
+                                  readOnly
+                                  className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
+
           <div className="mt-6 flex gap-4">
             <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full">
               Confirm Reservation
@@ -70,7 +113,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
           </div>
 
           <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-2">Room Features</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-400">Room Features</h2>
             <ul className="text-gray-600 space-y-2">
               <li>✔Private pool</li>
               <li>✔Rain Shower</li>
