@@ -192,47 +192,74 @@ export const getUser = async () => {
 }
 
 
-
-
 export const createHistory = async (history: {
   roomId: string;
   days: string[];
-  email:string;
 }) => {
-
   try {
     const user = await getUser();
 
     if (!user.success || !user.email) {
-      return { success: false, message: user.message || "User not found" };
+      return { success: false, message: "User not logged in" };
     }
-    const newHistory = { ...history, email: user.email };
-    
-
-    history.email = user.email;
 
     await dbConnect();
 
-    const result = await HistoryModel.create(newHistory);
-    if (!result) {
-      return {
-        success: false,
-        message: "Something went Wrong",
-      };
-    }
+    const result = await HistoryModel.create({
+      roomId: history.roomId,
+      days: history.days,
+      email: user.email,
+    });
 
     return {
       success: true,
-      message: "Room Reseved",
+      message: "Room reserved",
     };
   } catch (error: any) {
-    return { success: false, message: error?.message || "Unknown error" };
+    return { success: false, message: error.message };
   }
 };
 
+
+// export const createHistory = async (history: {
+//   roomId: string;
+//   days: string[];
+//   email:string;
+// }) => {
+
+//   try {
+//     const user = await getUser();
+
+//     if (!user.success || !user.email) {
+//       return { success: false, message: user.message || "User not found" };
+//     }
+//     const newHistory = { ...history, email: user.email };
+    
+
+//     history.email = user.email;
+
+//     await dbConnect();
+
+//     const result = await HistoryModel.create(newHistory);
+//     if (!result) {
+//       return {
+//         success: false,
+//         message: "Something went Wrong",
+//       };
+//     }
+
+//     return {
+//       success: true,
+//       message: "Room Reseved",
+//     };
+//   } catch (error: any) {
+//     return { success: false, message: error?.message || "Unknown error" };
+//   }
+// };
+
 export const fetchHistory = async ({ id }: { id: string }) => {
   await dbConnect();
-  const histories = await HistoryModel.find({ id });
+  const histories = await HistoryModel.find({ roomId: id });
   const result = histories.map((history) => ({
     roomId: history.roomId,
     email: history.email,

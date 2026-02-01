@@ -89,7 +89,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
               ₦{room.price.toLocaleString()}
             </span>
           </div>
-          <BookingDates />
+          <BookingDates roomId={room._id.toString()} />
           {/* <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-slate-700 mb-1">
@@ -125,11 +125,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
                             </div>
           </div> */}
 
-          <div className="mt-6 flex gap-4">
-            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full" >
-              Confirm Reservation
-            </button>
-          </div>
+          
 
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2 text-gray-400">

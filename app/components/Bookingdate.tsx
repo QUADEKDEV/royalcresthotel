@@ -3,50 +3,54 @@ import { useState, useEffect } from "react";
 import { createHistory } from "../utils/actions";
 import toast from "react-hot-toast";
 
-export default function BookingDates() {
+export default function BookingDates({ roomId }: { roomId: string }) {
   const [checkIn, setCheckIn] = useState<string>("");
   const [checkOut, setCheckOut] = useState<string>("");
   const [days, setDays] = useState<string[]>([]);
 
-type PageProps = {
-  params: {
-    _id: string;
+  type PageProps = {
+    params: {
+      _id: string;
+    };
   };
-};
 
+  // const handleBooking = async (bookingData: {
+  //   roomId: string;
+  //   days: string[];
+  //   email: string;
+  // }) => {
+  //   let historyData = {
+  //     roomId: bookingData.roomId,
+  //     days: bookingData.days,
+  //     email: bookingData.email,
+  //   };
+  //   let result = await createHistory(historyData);
+  //   if (!result.success) {
+  //     toast.error("somethig went wrong");
+  //   }
+  //   toast.success("Success");
+  // };
 
+  const handleBooking = async () => {
+    if (days.length === 0) {
+      toast.error("Please select booking dates");
+      return;
+    }
 
+    const result = await createHistory({
+      roomId,
+      days,
+    });
 
-const handleBooking=async(bookingData:{roomId:string,days:string[],email:string})=>{
-    
-  let historyData={
-    roomId:bookingData.roomId,
-    days:bookingData.days,
-    email:bookingData.email
-  }
-let result=await createHistory(historyData);
-if(!result.success){
-  toast.error("somethig went wrong");
-}
-toast.success("Success");
-}
+    if (!result.success) {
+      toast.error(result.message || "Something went wrong");
+      return;
+    }
 
-
-
-
+    toast.success("Room reserved successfully");
+  };
 
   const today = new Date().toISOString().split("T")[0];
-
-
-
-
-
-
-
-
-
-
-
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -107,6 +111,15 @@ toast.success("Success");
         className="border p-2"
       />
 
+      <div className="mt-6 flex gap-4">
+        <button
+          className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full"
+          onClick={handleBooking}
+        >
+          Confirm Reservation
+        </button>
+      </div>
+
       <div>
         <strong>Days booked:</strong>
         <ul>
@@ -115,8 +128,6 @@ toast.success("Success");
           ))}
         </ul>
       </div>
-
-      
     </div>
   );
 }
