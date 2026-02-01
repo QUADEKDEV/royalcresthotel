@@ -31,7 +31,7 @@ export default function UploadPage() {
         accept="image/*"
         onChange={(e) => setFile(e.target.files?.[0] || null)}
       />
-
+//wana check something
       <button onClick={uploadImage}>Upload</button>
 
       {imageUrl && <img src={imageUrl} alt="Uploaded" width={300} />}
