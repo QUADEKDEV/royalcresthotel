@@ -5,8 +5,6 @@ import Image from "next/image";
 import {Calendar} from "lucide-react";
 import BookingDates from "@/app/components/Bookingdate";
 import { createHistory } from "@/app/utils/actions";
-import toast from "react-hot-toast";
-import { getUser } from "@/app/utils/actions";
 
 
 
@@ -16,27 +14,27 @@ type PageProps = {
   };
 };
 
-const getusermail=async()=>{
-const user= await getUser();
-try {
-  if (!user.success) {
-    return{
-      status:false,
-      message:"Login to continue"
-    }
-  }
-  return{
-     status:false,
-      message:"User Found",
-      email:user.email,
-  }
-} catch (error) {
-  return {
-    status: false,
-    message: "Something went wrong",
-  };
-}
-}
+// const getusermail=async()=>{
+// const user= await getUser();
+// try {
+//   if (!user.success) {
+//     return{
+//       status:false,
+//       message:"Login to continue"
+//     }
+//   }
+//   return{
+//      status:false,
+//       message:"User Found",
+//       email:user.email,
+//   }
+// } catch (error) {
+//   return {
+//     status: false,
+//     message: "Something went wrong",
+//   };
+// }
+// }
 
 export const generateMetadata = async ({
   params,
@@ -127,14 +125,16 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
                             </div>
           </div> */}
 
-
-
-
-
-          
+          <div className="mt-6 flex gap-4">
+            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full" onClick={()=>createHistory({roomId:_id,days:["0"],email:''})}>
+              Confirm Reservation
+            </button>
+          </div>
 
           <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-2 text-gray-400">Room Features</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-400">
+              Room Features
+            </h2>
             <ul className="text-gray-600 space-y-2">
               <li>✔Private pool</li>
               <li>✔Rain Shower</li>

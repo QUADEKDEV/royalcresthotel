@@ -196,12 +196,24 @@ export const getUser = async () => {
 
 export const createHistory = async (history: {
   roomId: string;
-  email: string;
   days: string[];
+  email:string;
 }) => {
 
   try {
+    let useremail =await getUser();
+    if(!useremail){
+      return {
+        success: false,
+        message: "User not found",
+      };
+    }
+    history.email=useremail.email;
+
     await dbConnect();
+    
+
+
     const result = await HistoryModel.create(history);
     if (!result) {
       return {
