@@ -126,7 +126,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
           </div> */}
 
           <div className="mt-6 flex gap-4">
-            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full" onClick={()=>createHistory({roomId:_id,days:["0"],email:''})}>
+            <button className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full" onClick={()=>createHistory({roomId:_id,days:["0"],email:"1"})}>
               Confirm Reservation
             </button>
           </div>
