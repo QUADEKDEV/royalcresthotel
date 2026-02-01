@@ -3,6 +3,7 @@ import RoomModel from "@/models/room";
 import { Metadata } from "next";
 import Image from "next/image";
 import {Calendar} from "lucide-react";
+import BookingDates from "@/app/components/Bookingdate";
 
 
 type PageProps = {
@@ -64,8 +65,9 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
               ₦{room.price.toLocaleString()}
             </span>
           </div>
-
-          <div className="grid grid-cols-2 gap-4">
+          <BookingDates/>
+          
+          {/* <div className="grid grid-cols-2 gap-4">
                             <div>
                               <label className="block text-sm font-medium text-slate-700 mb-1">
                                 Check-in
@@ -98,7 +100,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
                                 />
                               </div>
                             </div>
-                          </div>
+          </div> */}
 
 
 
