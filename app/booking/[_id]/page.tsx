@@ -33,7 +33,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
   await dbConnect();
   const room = await RoomModel.findById(_id);
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 w-screen">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 w-screen selection:bg-amber-100">
       <div className="bg-white shadow-2xl rounded-3xl p-8 max-w-5xl w-full grid md:grid-cols-2 gap-10">
         <div>
           <div className="w-full h-[500px] bg-gray-200 rounded-2xl overflow-hidden">
@@ -75,7 +75,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2">Room Features</h2>
             <ul className="text-gray-600 space-y-2">
-              <li>✔Piate pool</li>
+              <li>✔Private pool</li>
               <li>✔Rain Shower</li>
               <li>✔jiacuzzi</li>
             </ul>
