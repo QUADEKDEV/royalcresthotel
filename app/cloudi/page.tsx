@@ -30,6 +30,7 @@ export default function UploadPage() {
       />
 
       <button onClick={uploadImage}>Upload</button>
+      <button onClick={()=>alert(imageUrl)}>_Alert</button>
 
       {imageUrl && <img src={imageUrl} width={300} />}
     </div>
