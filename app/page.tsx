@@ -6,8 +6,9 @@ import RoomCard from "./components/RoomCard";
 import PaymentModal from "./components/PaymentModal";
 import Dining from "./components/Dining";
 import Accommodation from "./components/Accommodation";
+import { Room } from "./utils/type";
 
-const ROOMS = await fetchroom();
+const ROOMS:Room[] = await fetchroom();
 export default function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900">
@@ -17,7 +18,7 @@ export default function App() {
         <Accommodation />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {ROOMS.map((room) => (
-            <RoomCard key={room.id} room={room} />
+            <RoomCard key={room._id} room={room} />
           ))}
         </div>
       </section>

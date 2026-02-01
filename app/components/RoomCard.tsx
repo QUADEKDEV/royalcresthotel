@@ -1,11 +1,11 @@
 "use client"
 import {MapPin,Users,}from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
 import { Room } from "../utils/type";
 
 // const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 // const [isModalOpen, setIsModalOpen] = useState(false);
+
 
 const RoomCard = ({
   room
@@ -69,7 +69,7 @@ const RoomCard = ({
               ₦{room.price.toLocaleString()}
             </p>
           </div>
-          <button  onClick={() => (window.location.href = `/booking/${room.price}`)}
+          <button  onClick={() => (window.location.href = `/booking/${room._id}`)}
             className="bg-slate-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-slate-800 transition-colors"
           >
             Book Now

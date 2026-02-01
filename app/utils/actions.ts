@@ -9,6 +9,7 @@ import RoomModel from "@/models/room"
 import { MongooseError } from "mongoose"
 import { revalidatePath } from "next/cache"
 import { MongoServerError } from "mongodb";
+import { Types } from "mongoose";
 
 export const signUp = async (userData: {
   firstname: string;
@@ -162,12 +163,11 @@ export const fetchroom = async () => {
     image: room.image,
     price: room.price,
     name: room.name,
-
     description: room.description,
     capacity: room.capacity,
     size: room.size,
     amenities: room.amenities,
-    id: room._id.toString(),
+    _id: room._id.toString(),
   }));
   return result;
 };
