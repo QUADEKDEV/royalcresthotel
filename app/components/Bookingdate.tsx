@@ -3,10 +3,21 @@ import { useState, useEffect } from "react";
 import { createHistory } from "../utils/actions";
 import toast from "react-hot-toast";
 
-export default function BookingDates({ roomId }: { roomId: string }) {
+export default function BookingDates({ roomId, price }: { roomId: string; price: number }) {
   const [checkIn, setCheckIn] = useState<string>("");
   const [checkOut, setCheckOut] = useState<string>("");
   const [days, setDays] = useState<string[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  useEffect(() => {
+  if (days.length > 0) {
+    setTotalPrice(days.length * price);
+  } else {
+    setTotalPrice(0);
+  }
+}, [days, price]);
+
+
 
   type PageProps = {
     params: {
@@ -110,7 +121,17 @@ export default function BookingDates({ roomId }: { roomId: string }) {
         onChange={(e) => setCheckOut(e.target.value)}
         className="border p-2"
       />
+      {days.length > 0 && (
+        <div className="mt-4 p-4 bg-gray-100 rounded-xl">
+          <p className="text-lg font-semibold text-gray-700">
+            {days.length} night{days.length > 1 ? "s" : ""}
+          </p>
 
+          <p className="text-2xl font-bold text-green-600 mt-1">
+            ₦{totalPrice.toLocaleString()}
+          </p>
+        </div>
+      )}
       <div className="mt-6 flex gap-4">
         <button
           className="px-8 py-4 bg-[#F46700] text-white rounded-xl text-lg font-semibold hover:bg-gray-800 transition w-full"

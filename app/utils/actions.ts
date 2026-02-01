@@ -209,7 +209,7 @@ export const createHistory = async (history: {
 
     await dbConnect();
 
-    // 🔴 CHECK IF ROOM IS ALREADY BOOKED FOR ANY OF THE DAYS
+   
     const existingBooking = await HistoryModel.findOne({
       roomId: history.roomId,
       days: { $in: history.days }, // 👈 overlap check
