@@ -14,5 +14,5 @@ const HistorySchema = new Schema<IHistory>(
   },
   { timestamps: true },
 );
-const HistoryModel = models.Room || model<IHistory>("History", HistorySchema);
+const HistoryModel = models.History || model<IHistory>("History", HistorySchema);
 export default HistoryModel;
