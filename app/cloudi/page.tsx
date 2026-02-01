@@ -9,19 +9,16 @@ export default function UploadPage() {
   const uploadImage = async () => {
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append("file", file);
 
-    reader.onloadend = async () => {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image: reader.result }),
-      });
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-      const data = await res.json();
-      setImageUrl(data.url);
-    };
+    const data = await res.json();
+    setImageUrl(data.url);
   };
 
   return (
@@ -33,9 +30,8 @@ export default function UploadPage() {
       />
 
       <button onClick={uploadImage}>Upload</button>
-      <button onClick={()=>alert(imageUrl)} className="text-red-700" >clickme</button>{imageUrl}
 
-      {imageUrl && <img src={imageUrl} alt="Uploaded" width={300} />}
+      {imageUrl && <img src={imageUrl} width={300} />}
     </div>
   );
 }
