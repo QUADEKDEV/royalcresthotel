@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
+import toast from "react-hot-toast";
 export default function BookingDates() {
   const [checkIn, setCheckIn] = useState<string>("");
   const [checkOut, setCheckOut] = useState<string>("");
@@ -11,22 +11,19 @@ export default function BookingDates() {
 
   useEffect(() => {
     if (!checkIn || !checkOut) return;
-
     const start = new Date(checkIn);
     const end = new Date(checkOut);
     const now = new Date(today);
-
-    // ❌ check-in cannot be before today
     if (start < now) {
-      alert("Check-in date cannot be earlier than today");
+      toast.error("Check-in date cannot be earlier than today");
       setCheckIn("");
       setDays([]);
       return;
     }
 
-    // ❌ check-in cannot be after check-out
+    
     if (start > end) {
-      alert("Check-in date cannot be greater than check-out date");
+      toast.error("Check-in date cannot be greater than check-out date");
       setCheckOut("");
       setDays([]);
       return;
