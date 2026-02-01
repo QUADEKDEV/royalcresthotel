@@ -1,4 +1,3 @@
-"use client"
 import { dbConnect } from "@/app/utils/dbConnect";
 import RoomModel from "@/models/room";
 import { Metadata } from "next";
@@ -61,7 +60,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
           </p>
 
           <div className="mt-6">
-            <span className="text-3xl font-bold text-gray-900">
+            <span className="text-2xl font-bold text-gray-900">
               ₦{room.price.toLocaleString()}
             </span>
           </div>
