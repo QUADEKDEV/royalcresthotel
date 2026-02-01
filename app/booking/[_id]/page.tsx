@@ -16,17 +16,27 @@ type PageProps = {
   };
 };
 
+const getusermail=async()=>{
 const user= await getUser();
 try {
   if (!user.success) {
-    toast.error("Please login in to continue");
+    return{
+      status:false,
+      message:"Login to continue"
+    }
   }
-  const email = user.email;
-  toast.success(email)
+  return{
+     status:false,
+      message:"User Found",
+      email:user.email,
+  }
 } catch (error) {
-  toast.error(user.message);
+  return {
+    status: false,
+    message: "Something went wrong",
+  };
 }
-
+}
 
 export const generateMetadata = async ({
   params,
