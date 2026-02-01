@@ -26,7 +26,7 @@ export default function ErrorPage() {
         {/* Floating Brand Mark (Mobile only) */}
         <div className="absolute top-6 left-6 lg:hidden z-10">
           <span className="text-xl font-serif font-bold text-white tracking-widest drop-shadow-md">
-            LUMINA<span className="text-amber-400">.</span>
+            Royal Crest Hotel<span className="text-amber-400">.</span>
           </span>
         </div>
       </div>
@@ -36,7 +36,7 @@ export default function ErrorPage() {
         {/* Desktop Brand Mark */}
         <div className="absolute top-8 right-8 hidden lg:block">
           <span className="text-2xl font-serif font-bold text-slate-900 tracking-widest">
-            LUMINA<span className="text-amber-600">.</span>
+            Royal Crest Hotel<span className="text-amber-600">.</span>
           </span>
         </div>
 
