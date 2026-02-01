@@ -201,20 +201,19 @@ export const createHistory = async (history: {
 }) => {
 
   try {
-    let useremail =await getUser();
-    if(!useremail){
-      return {
-        success: false,
-        message: "User not found",
-      };
-    }
-    history.email=useremail.email;
+    const user = await getUser();
 
-    await dbConnect();
+    if (!user.success || !user.email) {
+      return { success: false, message: user.message || "User not found" };
+    }
+    const newHistory = { ...history, email: user.email };
     
 
+    history.email = user.email;
 
-    const result = await HistoryModel.create(history);
+    await dbConnect();
+
+    const result = await HistoryModel.create(newHistory);
     if (!result) {
       return {
         success: false,
@@ -226,11 +225,8 @@ export const createHistory = async (history: {
       success: true,
       message: "Room Reseved",
     };
-  } catch (error) {
-    return {
-      success: false,
-      message: error,
-    };
+  } catch (error: any) {
+    return { success: false, message: error?.message || "Unknown error" };
   }
 };
 
