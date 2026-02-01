@@ -119,15 +119,6 @@ export default function BookingDates({ roomId }: { roomId: string }) {
           Confirm Reservation
         </button>
       </div>
-
-      <div>
-        <strong>Days booked:</strong>
-        <ul>
-          {days.map((day, index) => (
-            <li key={index}>{formatDate(day)}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 }

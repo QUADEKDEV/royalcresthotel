@@ -200,12 +200,30 @@ export const createHistory = async (history: {
     const user = await getUser();
 
     if (!user.success || !user.email) {
-      return { success: false, message: "User not logged in" };
+      return { success: false, message: "Please login to continue" };
+    }
+
+    if (!history.days || history.days.length === 0) {
+      return { success: false, message: "No booking days selected" };
     }
 
     await dbConnect();
 
-    const result = await HistoryModel.create({
+    // 🔴 CHECK IF ROOM IS ALREADY BOOKED FOR ANY OF THE DAYS
+    const existingBooking = await HistoryModel.findOne({
+      roomId: history.roomId,
+      days: { $in: history.days }, // 👈 overlap check
+    });
+
+    if (existingBooking) {
+      return {
+        success: false,
+        message: "Room is already booked for one or more selected dates",
+      };
+    }
+
+    // ✅ SAVE BOOKING
+    await HistoryModel.create({
       roomId: history.roomId,
       days: history.days,
       email: user.email,
@@ -213,12 +231,44 @@ export const createHistory = async (history: {
 
     return {
       success: true,
-      message: "Room reserved",
+      message: "Room reserved successfully",
     };
   } catch (error: any) {
-    return { success: false, message: error.message };
+    return {
+      success: false,
+      message: error.message || "Something went wrong",
+    };
   }
 };
+
+
+// export const createHistory = async (history: {
+//   roomId: string;
+//   days: string[];
+// }) => {
+//   try {
+//     const user = await getUser();
+
+//     if (!user.success || !user.email) {
+//       return { success: false, message: "User not logged in" };
+//     }
+
+//     await dbConnect();
+
+//     const result = await HistoryModel.create({
+//       roomId: history.roomId,
+//       days: history.days,
+//       email: user.email,
+//     });
+
+//     return {
+//       success: true,
+//       message: "Room reserved",
+//     };
+//   } catch (error: any) {
+//     return { success: false, message: error.message };
+//   }
+// };
 
 
 // export const createHistory = async (history: {
