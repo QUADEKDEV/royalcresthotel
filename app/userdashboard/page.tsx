@@ -24,6 +24,7 @@ import {
   Menu,
   X,
   Bell,
+  ArrowLeft,
 } from "lucide-react";
 
 // Mock data for the user experience
@@ -100,16 +101,14 @@ useEffect(() => {
           <X size={24} />
         </button>
       </div>
-      <button onClick={()=>(window.location.href="/")}>
-        Home
-      </button>
+  
 
       <nav className="space-y-2 flex-1">
         {[
           { name: "Overview", icon: <Home size={20} /> },
-          { name: "Reservations", icon: <Calendar size={20} /> },
-          { name: "Explore", icon: <Compass size={20} /> },
-          { name: "Favorites", icon: <Heart size={20} /> },
+          { name: "Reservations", icon: <Calendar size={20} /> , path:'/suites'},
+          { name: "Explore", icon: <Compass size={20} />,path:'/suites' },
+          { name: " Home", icon: <ArrowLeft size={20} />,path:'/' },
           // { name: "Membership", icon: <Star size={20} /> },
         ].map((item) => (
           <button
@@ -117,6 +116,7 @@ useEffect(() => {
             onClick={() => {
               setActiveTab(item.name);
               setIsSidebarOpen(false);
+              window.location.href=`${item.path}`;
             }}
             className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
               activeTab === item.name
