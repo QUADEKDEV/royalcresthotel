@@ -139,179 +139,325 @@ const LeafletMap = () => {
     />
   );
 };
-const ContactForm = () => {
+const ContactForm=()=>{
+   const [loading, setLoading] = useState(false);
+   const [feedback, setFeedback] = useState<null | "success" | "error">(null);
 
-const [loading, setLoading] = useState(false);
-const [form, setForm] = useState({
-  firstname: "",
-  lastname: "",
-  email: "",
-  subject: "General Inquiry",
-  message: "",
-});
+   const [form, setForm] = useState({
+     firstname: "",
+     lastname: "",
+     email: "",
+     subject: "General Inquiry",
+     message: "",
+   });
 
-const handleChange = (
-  e: React.ChangeEvent<
-    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-  >,
-) => {
-  setForm({ ...form, [e.target.name]: e.target.value });
-};
+   const handleChange = (
+     e: React.ChangeEvent<
+       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+     >,
+   ) => {
+     setForm({ ...form, [e.target.name]: e.target.value });
+   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setLoading(true);
+   const handleSubmit = async (e: React.FormEvent) => {
+     e.preventDefault();
+     setLoading(true);
+     setFeedback(null);
 
-  const res = await SendMessage(form);
+     const res = await SendMessage(form);
 
-  setLoading(false);
+     setLoading(false);
 
-  if (res.status) {
-    toast.success("Message sent successfully 🎉");
-    setForm({
-      firstname: "",
-      lastname: "",
-      email: "",
-      subject: "General Inquiry",
-      message: "",
-    });
-  } else {
-    toast.error(res.message);
-  }
-};
+     if (res?.status) {
+       setFeedback("success");
+       setForm({
+         firstname: "",
+         lastname: "",
+         email: "",
+         subject: "General Inquiry",
+         message: "",
+       });
+     } else {
+       setFeedback("error");
+     }
+   };
 
-return (
-  <form className="space-y-6" onSubmit={handleSubmit}>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <input
-        name="firstname"
-        value={form.firstname}
-        onChange={handleChange}
-        placeholder="First Name"
-        className="input"
-        required
-      />
-      <input
-        name="lastname"
-        value={form.lastname}
-        onChange={handleChange}
-        placeholder="Last Name"
-        className="input"
-        required
-      />
-    </div>
+   return (
+     <form className="space-y-6" onSubmit={handleSubmit}>
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <div className="space-y-2">
+           <label className="text-sm font-medium text-slate-700">
+             First Name
+           </label>
+           <input
+             type="text"
+             name="firstname"
+             value={form.firstname}
+             onChange={handleChange}
+             placeholder="First Name"
+             required
+             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+           />
+         </div>
 
-    <input
-      type="email"
-      name="email"
-      value={form.email}
-      onChange={handleChange}
-      placeholder="quadek@example.com"
-      className="input"
-      required
-    />
+         <div className="space-y-2">
+           <label className="text-sm font-medium text-slate-700">
+             Last Name
+           </label>
+           <input
+             type="text"
+             name="lastname"
+             value={form.lastname}
+             onChange={handleChange}
+             placeholder="Last Name"
+             required
+             className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+           />
+         </div>
+       </div>
 
-    <select
-      name="subject"
-      value={form.subject}
-      onChange={handleChange}
-      className="input"
-    >
-      <option>General Inquiry</option>
-      <option>Reservation Assistance</option>
-      <option>Event Planning</option>
-      <option>Press & Media</option>
-    </select>
+       <div className="space-y-2">
+         <label className="text-sm font-medium text-slate-700">
+           Email Address
+         </label>
+         <input
+           type="email"
+           name="email"
+           value={form.email}
+           onChange={handleChange}
+           placeholder="quadek@example.com"
+           required
+           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+         />
+       </div>
 
-    <textarea
-      name="message"
-      value={form.message}
-      onChange={handleChange}
-      rows={4}
-      placeholder="How can we make your stay exceptional?"
-      className="input"
-      required
-    />
+       <div className="space-y-2">
+         <label className="text-sm font-medium text-slate-700">Subject</label>
+         <select
+           name="subject"
+           value={form.subject}
+           onChange={handleChange}
+           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+         >
+           <option>General Inquiry</option>
+           <option>Reservation Assistance</option>
+           <option>Event Planning</option>
+           <option>Press & Media</option>
+         </select>
+       </div>
 
-    <button
-      disabled={loading}
-      className="w-full bg-slate-900 text-white py-4 rounded-xl"
-    >
-      {loading ? "Sending..." : "Send Message"}
-    </button>
-  </form>
-);
+       <div className="space-y-2">
+         <label className="text-sm font-medium text-slate-700">Message</label>
+         <textarea
+           name="message"
+           value={form.message}
+           onChange={handleChange}
+           rows={4}
+           placeholder="How can we make your stay exceptional?"
+           required
+           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all resize-none"
+         />
+       </div>
+
+       <button
+         disabled={loading}
+         className="w-full bg-slate-900 text-white font-medium py-4 rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group disabled:opacity-60"
+       >
+         {loading ? "Sending..." : "Send Message"}
+         <Send
+           size={18}
+           className="group-hover:translate-x-1 transition-transform"
+         />
+       </button>
+
+       {feedback === "success" && (
+         <p className="text-green-600 text-sm text-center">
+           Message sent successfully ✅
+         </p>
+       )}
+
+       {feedback === "error" && (
+         <p className="text-red-600 text-sm text-center">
+           Something went wrong ❌
+         </p>
+       )}
+     </form>
+   );
+
+}
+// const ContactForm = () => {
+
+// const [loading, setLoading] = useState(false);
+// const [form, setForm] = useState({
+//   firstname: "",
+//   lastname: "",
+//   email: "",
+//   subject: "General Inquiry",
+//   message: "",
+// });
+
+// const handleChange = (
+//   e: React.ChangeEvent<
+//     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+//   >,
+// ) => {
+//   setForm({ ...form, [e.target.name]: e.target.value });
+// };
+
+// const handleSubmit = async (e: React.FormEvent) => {
+//   e.preventDefault();
+//   setLoading(true);
+
+//   const res = await SendMessage(form);
+
+//   setLoading(false);
+
+//   if (res.status) {
+//     toast.success("Message sent successfully 🎉");
+//     setForm({
+//       firstname: "",
+//       lastname: "",
+//       email: "",
+//       subject: "General Inquiry",
+//       message: "",
+//     });
+//   } else {
+//     toast.error(res.message);
+//   }
+// };
+
+// return (
+//   <form className="space-y-6" onSubmit={handleSubmit}>
+//     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//       <input
+//         name="firstname"
+//         value={form.firstname}
+//         onChange={handleChange}
+//         placeholder="First Name"
+//         className="input"
+//         required
+//       />
+//       <input
+//         name="lastname"
+//         value={form.lastname}
+//         onChange={handleChange}
+//         placeholder="Last Name"
+//         className="input"
+//         required
+//       />
+//     </div>
+
+//     <input
+//       type="email"
+//       name="email"
+//       value={form.email}
+//       onChange={handleChange}
+//       placeholder="quadek@example.com"
+//       className="input"
+//       required
+//     />
+
+//     <select
+//       name="subject"
+//       value={form.subject}
+//       onChange={handleChange}
+//       className="input"
+//     >
+//       <option>General Inquiry</option>
+//       <option>Reservation Assistance</option>
+//       <option>Event Planning</option>
+//       <option>Press & Media</option>
+//     </select>
+
+//     <textarea
+//       name="message"
+//       value={form.message}
+//       onChange={handleChange}
+//       rows={4}
+//       placeholder="How can we make your stay exceptional?"
+//       className="input"
+//       required
+//     />
+
+//     <button
+//       disabled={loading}
+//       className="w-full bg-slate-900 text-white py-4 rounded-xl"
+//     >
+//       {loading ? "Sending..." : "Send Message"}
+//     </button>
+//   </form>
+// );
 
   
 
 
 
 
-  // return (
-  //   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-  //     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  //       <div className="space-y-2">
-  //         <label className="text-sm font-medium text-slate-700">
-  //           First Name
-  //         </label>
-  //         <input
-  //           type="text"
-  //           placeholder="First Name"
-  //           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
-  //         />
-  //       </div>
-  //       <div className="space-y-2">
-  //         <label className="text-sm font-medium text-slate-700">
-  //           Last Name
-  //         </label>
-  //         <input
-  //           type="text"
-  //           placeholder="Last Name"
-  //           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
-  //         />
-  //       </div>
-  //     </div>
+//   // return (
+//   //   <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+//   //     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+//   //       <div className="space-y-2">
+//   //         <label className="text-sm font-medium text-slate-700">
+//   //           First Name
+//   //         </label>
+//   //         <input
+//   //           type="text"
+//   //           placeholder="First Name"
+//   //           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+//   //         />
+//   //       </div>
+//   //       <div className="space-y-2">
+//   //         <label className="text-sm font-medium text-slate-700">
+//   //           Last Name
+//   //         </label>
+//   //         <input
+//   //           type="text"
+//   //           placeholder="Last Name"
+//   //           className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+//   //         />
+//   //       </div>
+//   //     </div>
 
-  //     <div className="space-y-2">
-  //       <label className="text-sm font-medium text-slate-700">
-  //         Email Address
-  //       </label>
-  //       <input
-  //         type="email"
-  //         placeholder="quadek@example.com"
-  //         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
-  //       />
-  //     </div>
+//   //     <div className="space-y-2">
+//   //       <label className="text-sm font-medium text-slate-700">
+//   //         Email Address
+//   //       </label>
+//   //       <input
+//   //         type="email"
+//   //         placeholder="quadek@example.com"
+//   //         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all"
+//   //       />
+//   //     </div>
 
-  //     <div className="space-y-2">
-  //       <label className="text-sm font-medium text-slate-700">Subject</label>
-  //       <select className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
-  //         <option>General Inquiry</option>
-  //         <option>Reservation Assistance</option>
-  //         <option>Event Planning</option>
-  //         <option>Press & Media</option>
-  //       </select>
-  //     </div>
+//   //     <div className="space-y-2">
+//   //       <label className="text-sm font-medium text-slate-700">Subject</label>
+//   //       <select className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all">
+//   //         <option>General Inquiry</option>
+//   //         <option>Reservation Assistance</option>
+//   //         <option>Event Planning</option>
+//   //         <option>Press & Media</option>
+//   //       </select>
+//   //     </div>
 
-  //     <div className="space-y-2">
-  //       <label className="text-sm font-medium text-slate-700">Message</label>
-  //       <textarea
-  //         rows={4}
-  //         placeholder="How can we make your stay exceptional?"
-  //         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all resize-none"
-  //       />
-  //     </div>
+//   //     <div className="space-y-2">
+//   //       <label className="text-sm font-medium text-slate-700">Message</label>
+//   //       <textarea
+//   //         rows={4}
+//   //         placeholder="How can we make your stay exceptional?"
+//   //         className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all resize-none"
+//   //       />
+//   //     </div>
 
-  //     <button className="w-full bg-slate-900 text-white font-medium py-4 rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group">
-  //       Send Message
-  //       <Send
-  //         size={18}
-  //         className="group-hover:translate-x-1 transition-transform"
-  //       />
-  //     </button>
-  //   </form>
-  // );
-};
+//   //     <button className="w-full bg-slate-900 text-white font-medium py-4 rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 group">
+//   //       Send Message
+//   //       <Send
+//   //         size={18}
+//   //         className="group-hover:translate-x-1 transition-transform"
+//   //       />
+//   //     </button>
+//   //   </form>
+//   // );
+// };
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900 pt-20">
