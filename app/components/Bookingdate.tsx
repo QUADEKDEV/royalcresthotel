@@ -27,7 +27,7 @@ export default function BookingDates({
     reference: new Date().getTime().toString(),
     email: "adejumobiquadri@gmail.com",
     amount: totalPrice * 100,
-    publicKey:process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,,
+    publicKey:process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
   };
 
   const initializePayment = usePaystackPayment(config);
@@ -58,15 +58,26 @@ export default function BookingDates({
     toast.error("Payment cancelled");
   };
 
-  const handleBooking = () => {
-    if (days.length === 0) {
-      toast.error("Please select booking dates");
-      return;
-    }
 
-    // Pass a single object instead of two arguments
-    initializePayment({ onSuccess, onClose });
-  };
+const handleBooking = () => {
+  if (days.length === 0 || totalPrice <= 0) {
+    toast.error("Please select valid booking dates");
+    return;
+  }
+
+  initializePayment({ onSuccess, onClose });
+};
+
+
+  // const handleBooking = () => {
+  //   if (days.length === 0) {
+  //     toast.error("Please select booking dates");
+  //     return;
+  //   }
+
+  //   // Pass a single object instead of two arguments
+  //   initializePayment({ onSuccess, onClose });
+  // };
 
   const today = new Date().toISOString().split("T")[0];
 
