@@ -275,6 +275,59 @@ export const SendMessage=async(enquire:{firstname:string,lastname:string,email:s
 }
 
 
+
+
+
+
+
+export async function getUserDashboardData() {
+  await dbConnect();
+
+  // 1️⃣ Get logged-in user from session/cookie
+  const sessionUser = await getUser();
+  // expected: { email: string }
+
+  if (!sessionUser?.email) {
+    return null;
+  }
+
+  // 2️⃣ Fetch full user record
+  const user = await UserModel.findOne({ email: sessionUser.email })
+    .select("firstname lastname email role")
+    .lean();
+
+  if (!user) return null;
+
+  // 3️⃣ Fetch booking/history records for this user
+  const history = await HistoryModel.find({ email: user.email })
+    .sort({ createdAt: -1 })
+    .lean();
+
+  // 4️⃣ Shape data for dashboard
+  return {
+    user: {
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      role: user.role,
+    },
+    history: history.map((item) => ({
+      id: item._id.toString(),
+      roomId: item.roomId,
+      days: item.days,
+      paymentReference: item.paymentReference,
+      createdAt: item.createdAt,
+    })),
+  };
+}
+
+
+
+
+
+
+
+
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const transporter = nodemailer.createTransport({

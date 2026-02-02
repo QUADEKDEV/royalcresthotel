@@ -1,8 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { logout } from "../utils/actions";
+import { getUserDashboardData } from "../utils/actions";
+
+
 import {
   Home,
   Calendar,
@@ -43,6 +46,33 @@ const upcomingBookings = [
 ];
 
 export default function UserDashboard() {
+
+
+const [user, setUser] = useState<null | {
+  firstname: string;
+  lastname: string;
+  email: string;
+}>(null);
+
+const [history, setHistory] = useState<any[]>([]);
+const [loading, setLoading] = useState(true);
+useEffect(() => {
+  const fetchData = async () => {
+    const data = await getUserDashboardData();
+    if (data) {
+      setUser(data.user);
+      setHistory(data.history);
+    }
+    setLoading(false);
+  };
+
+  fetchData();
+}, []);
+
+
+
+
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Overview");
 
@@ -97,17 +127,19 @@ export default function UserDashboard() {
       <div className="mt-auto p-4 bg-slate-50 rounded-2xl border border-slate-100">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-bold">
-            JD
+            {user?.firstname?.[0]}
+            {user?.lastname?.[0]}
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-bold text-slate-900 truncate">
-              Julianne Deville
+              {user?.firstname} {user?.lastname}
             </p>
             <p className="text-[10px] uppercase tracking-wider text-amber-600 font-bold">
               Gold Member
             </p>
           </div>
-          <LogOut onClick={handleLogout}
+          <LogOut
+            onClick={handleLogout}
             size={16}
             className="text-slate-300 cursor-pointer hover:text-slate-900"
           />
@@ -181,7 +213,7 @@ export default function UserDashboard() {
           >
             <div>
               <h1 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900">
-                Welcome back, Julianne
+                Welcome back, {user?.firstname}
               </h1>
               <p className="text-slate-500 mt-2 flex items-center gap-2">
                 <MapPin size={16} /> Currently browsing.
