@@ -372,9 +372,9 @@ export default function AdminDashboard() {
               className="relative bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden my-auto"
             >
               <div className="flex justify-between items-center p-6 sm:p-8 border-b border-slate-100 bg-slate-50/50">
-                <h2 className="text-xl sm:text-2xl font-serif font-bold">
+                <h3 className="text-xl sm:text-2xl font-serif font-bold">
                   New Room Specification
-                </h2>
+                </h3>
                 <button
                   onClick={() => setIsModalOpen(false)}
                   className="p-2 hover:bg-white rounded-full transition-colors"
