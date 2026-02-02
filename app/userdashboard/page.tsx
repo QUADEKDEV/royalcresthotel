@@ -146,15 +146,6 @@ export default function UserDashboard() {
             <Menu size={24} />
           </button>
 
-          <div className="hidden sm:flex items-center gap-4 bg-white px-4 py-2 rounded-2xl border border-slate-100 shadow-sm flex-1 max-w-md">
-            <Search size={18} className="text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search your next escape..."
-              className="bg-transparent border-none focus:ring-0 text-sm w-full"
-            />
-          </div>
-
           <div className="flex items-center gap-4">
             <button className="relative p-2 text-slate-400 hover:text-slate-900 transition-colors">
               <Bell size={22} />
