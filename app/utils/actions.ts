@@ -12,6 +12,7 @@ import { MongoServerError } from "mongodb";
 import { Types } from "mongoose";
 import { form } from "./type"
 import HistoryModel from "@/models/history"
+import EnquireModel from "@/models/enquiry"
 
 export const signUp = async (userData: {
   firstname: string;
@@ -253,6 +254,31 @@ export const fetchHistory = async ({ id }: { id: string }) => {
 
   return result;
 };
+
+
+export const SendMessage=async(enquire:{firstname:string,lastname:string,email:string,subject:string,message:string})=>{
+  try {
+    await dbConnect();
+    const post = await EnquireModel.create(enquire);
+    revalidatePath("/contactus");
+    return {
+      status: true,
+      message: "Message sent successfully",
+    };
+  } catch (error) {
+    if (error instanceof MongoServerError && error.code === 11000) {
+      return {
+        status: false,
+        message: "Something Went Wrong",
+      };
+    }
+    return {
+      status: false,
+      message: "something went wrong",
+    };
+  }
+
+}
 
 
 const nodemailer = require("nodemailer");

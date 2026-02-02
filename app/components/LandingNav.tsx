@@ -5,8 +5,6 @@ import {Menu,X,}
 import { motion, AnimatePresence } from "framer-motion";
 
 
-
-
 const LandingNav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
