@@ -296,7 +296,9 @@ useEffect(() => {
           {/* Sidebar Panel */}
           <div className="space-y-8">
             {/* Past Experiences */}
-
+                <h2 className="text-lg font-serif font-bold mb-6">
+                Recent Stays
+              </h2>
             {loading && <p className="text-sm text-slate-400">Loading...</p>}
 
             <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
@@ -308,7 +310,7 @@ useEffect(() => {
                 <div key={i} className="flex items-start justify-between">
                   <div>
                     <p className="text-sm font-bold text-slate-900">
-                      {item.subject}
+                      {item.name}
                     </p>
                     <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
                       {new Date(item.createdAt).toDateString()}
@@ -323,9 +325,7 @@ useEffect(() => {
                 </div>
               ))}
 
-              <h2 className="text-lg font-serif font-bold mb-6">
-                Recent Stays
-              </h2>
+              
               <div className="space-y-6">
                 {[
                   { name: "Lumina Paris", date: "August 2023", rating: 5 },
