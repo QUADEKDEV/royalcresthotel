@@ -265,7 +265,7 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        {/* Inventory List */}
+        //Inventory List
         <section className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-6 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 className="font-serif font-bold text-xl">Current Inventory</h2>
@@ -354,7 +354,7 @@ export default function AdminDashboard() {
         </section>
       </main>
 
-      {/* Add Room Modal Overlay */}
+      //Add Room Modal Overlay 
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
@@ -385,7 +385,7 @@ export default function AdminDashboard() {
 
               <form
                 onSubmit={handleAddRoom}
-                className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[80vh] overflow-y-auto md:overflow-visible"
+                className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[85vh] overflow-y-auto md:overflow-visible"
               >
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
@@ -544,25 +544,6 @@ export default function AdminDashboard() {
                     />
                   </div>
                 </div>
-
-                {/* <div className="space-y-2">
-                  <label className="text-xs uppercase tracking-widest font-bold text-slate-400">
-                    Amenities
-                  </label>
-                  <div className="relative">
-                    <Maximize
-                      className="absolute left-4 top-3.5 text-slate-300"
-                      size={18}
-                    />
-                    <input
-                      className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-500/20 text-sm sm:text-base"
-                      placeholder="e.g. 120"
-                      onChange={(e) =>
-                        setNewRoom({ ...newRoom, amenities: e.target.value })
-                      }
-                    />
-                  </div>
-                </div> */}
 
                 <div className="md:col-span-2 pt-4">
                   <button
