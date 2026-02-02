@@ -127,7 +127,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
 
           
 
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <h2 className="text-xl font-semibold mb-2 text-gray-400">
               Room Features
             </h2>
@@ -136,7 +136,7 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
               <li>✔Rain Shower</li>
               <li>✔jiacuzzi</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
