@@ -52,7 +52,7 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({
     totalRevenue: 0,
     occupancyRate: 0,
-    totalBookings: 0,
+    totalBookings: 0
   });
 
   useEffect(() => {

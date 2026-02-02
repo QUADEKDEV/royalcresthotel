@@ -30,7 +30,7 @@ const Hero = () => {
             elegance meets timeless nature.
           </p>
           <button
-            // onClick={onExplore}
+            onClick={()=>(window.location.href="/suit")}
             className="group bg-amber-500 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-amber-600 transition-all flex items-center gap-2 mx-auto"
           >
             Explore Suites{" "}
