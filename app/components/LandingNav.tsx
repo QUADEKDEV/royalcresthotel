@@ -97,9 +97,8 @@ const LandingNav = () => {
               <a href="contactus">Contact Us</a>
               <button
                 className={`px-6 py-2 rounded-full transition-all ${
-                  scrolled
-                    ? "bg-slate-900 text-white hover:bg-slate-800"
-                    : "bg-white text-slate-900 hover:bg-slate-100"
+                   "bg-slate-900 text-white hover:bg-slate-800"
+                   
                 }`}
                 onClick={() => (window.location.href = "/login")}
               >
