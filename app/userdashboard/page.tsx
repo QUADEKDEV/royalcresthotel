@@ -154,9 +154,9 @@ export default function UserDashboard() {
             <div className="h-10 w-px bg-slate-200 mx-2 hidden sm:block" />
             <div className="hidden sm:block text-right">
               <p className="text-xs text-slate-400 font-medium tracking-wide uppercase">
-                Points Balance
+                Royal crest bonus
               </p>
-              <p className="text-sm font-bold text-slate-900">12,450 LUM</p>
+              <p className="text-sm font-bold text-slate-900"> ₦5,000</p>
             </div>
           </div>
         </header>
