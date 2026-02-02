@@ -48,7 +48,7 @@ export default function UserDashboard() {
     <>
       <div className="flex items-center justify-between mb-12">
         <div className="text-xl font-serif font-bold tracking-widest text-slate-900">
-          LUMINA<span className="text-amber-500">.</span>
+          Royal Crest<span className="text-amber-500">.</span>
         </div>
         <button
           className="lg:hidden text-slate-900"
@@ -274,32 +274,6 @@ export default function UserDashboard() {
 
           {/* Sidebar Panel */}
           <div className="space-y-8">
-            {/* Payment Methods */}
-            <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
-              <h2 className="text-lg font-serif font-bold mb-6">
-                Linked Accounts
-              </h2>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-white p-2 rounded-lg shadow-sm">
-                      <CreditCard size={16} className="text-slate-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-slate-900">
-                        Visa ending in 4429
-                      </p>
-                      <p className="text-[10px] text-slate-400 uppercase tracking-wider font-bold">
-                        Default Method
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <button className="w-full py-3 text-sm font-bold text-slate-400 border-2 border-dashed border-slate-100 rounded-2xl hover:border-amber-200 hover:text-amber-600 transition-all">
-                  + Add New Method
-                </button>
-              </div>
-            </div>
 
             {/* Past Experiences */}
             <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
