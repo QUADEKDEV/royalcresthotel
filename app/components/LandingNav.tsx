@@ -46,19 +46,23 @@ const LandingNav = () => {
           <a href="/suites" className="hover:text-amber-500 transition-colors">
             Suites
           </a>
-          <a href="/contactus" className="hover:text-amber-500 transition-colors">
+          <a
+            href="/contactus"
+            className="hover:text-amber-500 transition-colors"
+          >
             Contact Us
           </a>
           <a href="/about" className="hover:text-amber-500 transition-colors">
             About Us
           </a>
-     
+
           <button
             className={`px-6 py-2 rounded-full transition-all ${
               scrolled
                 ? "bg-slate-900 text-white hover:bg-slate-800"
                 : "bg-white text-slate-900 hover:bg-slate-100"
-            }`} onClick={()=>(window.location.href="/login")}
+            }`}
+            onClick={() => (window.location.href = "/login")}
           >
             Sign In
           </button>
@@ -87,9 +91,20 @@ const LandingNav = () => {
             className="md:hidden bg-white border-t"
           >
             <div className="flex flex-col p-6 space-y-4 text-slate-900 font-medium">
-              <a href="#">Suites</a>
-              <a href="#">Dining</a>
-              <a href="#">Experiences</a>
+              <a href="/">Home</a>
+              <a href="/suites">Suites</a>
+              <a href="/about">About Us</a>
+              <a href="contactus">Contact Us</a>
+              <button
+                className={`px-6 py-2 rounded-full transition-all ${
+                  scrolled
+                    ? "bg-slate-900 text-white hover:bg-slate-800"
+                    : "bg-white text-slate-900 hover:bg-slate-100"
+                }`}
+                onClick={() => (window.location.href = "/login")}
+              >
+                Sign In
+              </button>
             </div>
           </motion.div>
         )}
