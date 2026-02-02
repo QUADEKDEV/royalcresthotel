@@ -40,14 +40,17 @@ const LandingNav = () => {
             scrolled ? "text-slate-600" : "text-white/90"
           }`}
         >
-          <a href="#" className="hover:text-amber-500 transition-colors">
+          <a href="/" className="hover:text-amber-500 transition-colors">
+            Home
+          </a>
+          <a href="/suites" className="hover:text-amber-500 transition-colors">
             Suites
           </a>
-          <a href="#" className="hover:text-amber-500 transition-colors">
-            Dining
+          <a href="/contactus" className="hover:text-amber-500 transition-colors">
+            Contact Us
           </a>
-          <a href="#" className="hover:text-amber-500 transition-colors">
-            Experiences
+          <a href="/about" className="hover:text-amber-500 transition-colors">
+            About Us
           </a>
      
           <button
