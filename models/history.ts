@@ -12,7 +12,7 @@ const HistorySchema = new Schema<IHistory>(
     roomId: { type: String, required: true },
     email: { type: String, required: true },
     days: { type: [String], default: [] },
-    paymentReference: { type: String, required: true },
+    paymentReference: { type: String,},
   },
   { timestamps: true },
 );

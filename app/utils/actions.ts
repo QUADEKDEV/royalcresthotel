@@ -196,7 +196,7 @@ export const getUser = async () => {
 export const createHistory = async (history: {
   roomId: string;
   days: string[];
-  paymentReference: string;
+ 
 }) => {
   try {
     const user = await getUser();
@@ -228,7 +228,6 @@ export const createHistory = async (history: {
       roomId: history.roomId,
       days: history.days,
       email: user.email,
-      paymentReference:history.paymentReference,
     });
 
     return {
