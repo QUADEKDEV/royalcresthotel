@@ -16,16 +16,11 @@ import {
 } from "lucide-react";
 
 
-// --- Types for Leaflet (Mocking for TypeScript since we load via CDN) ---
 declare global {
   interface Window {
     L: any;
   }
 }
-
-
-
-
 const LeafletMap = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<any>(null);
@@ -126,7 +121,6 @@ const LeafletMap = () => {
     />
   );
 };
-
 const ContactForm = () => {
   return (
     <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -193,13 +187,10 @@ const ContactForm = () => {
     </form>
   );
 };
-
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900 pt-20">
      <LandingNav/>
-
-      {/* Header */}
       <div className="bg-slate-900 text-white py-20 px-6">
         <div className="container mx-auto max-w-6xl text-center">
           <motion.div
@@ -220,8 +211,6 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </div>
-
-      {/* Main Content Grid */}
       <div className="container mx-auto max-w-7xl px-4 md:px-6 -mt-10 mb-20 relative z-10">
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row min-h-[700px]">
           {/* Left: Contact Form */}
