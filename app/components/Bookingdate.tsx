@@ -65,6 +65,7 @@ const handleBooking = () => {
     return;
   }
   toast.error(days.length.toString())
+  toast.error(totalPrice.toString());
   initializePayment({ onSuccess, onClose });
 };
 
