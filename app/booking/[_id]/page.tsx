@@ -14,28 +14,6 @@ type PageProps = {
   };
 };
 
-// const getusermail=async()=>{
-// const user= await getUser();
-// try {
-//   if (!user.success) {
-//     return{
-//       status:false,
-//       message:"Login to continue"
-//     }
-//   }
-//   return{
-//      status:false,
-//       message:"User Found",
-//       email:user.email,
-//   }
-// } catch (error) {
-//   return {
-//     status: false,
-//     message: "Something went wrong",
-//   };
-// }
-// }
-
 export const generateMetadata = async ({
   params,
 }: {
@@ -90,53 +68,6 @@ const page = async ({ params }: { params: Promise<{ _id: string }> }) => {
             </span>
           </div>
           <BookingDates roomId={room._id.toString()} price={room.price}/>
-          {/* <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <label className="block text-sm font-medium text-slate-700 mb-1">
-                                Check-in
-                              </label>
-                              <div className="relative">
-                                <Calendar
-                                  size={16}
-                                  className="absolute left-3 top-3.5 text-slate-400"
-                                />
-                                <input
-                                  type="text"
-                                  value="Oct 24, 2025"
-                                  className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <label className="block text-sm font-medium text-slate-700 mb-1">
-                                Check-out
-                              </label>
-                              <div className="relative">
-                                <Calendar
-                                  size={16}
-                                  className="absolute left-3 top-3.5 text-slate-400"
-                                />
-                                <input
-                                  type="text"
-                                  value="Oct 26, 2025"
-                                  className="w-full pl-10 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500"
-                                />
-                              </div>
-                            </div>
-          </div> */}
-
-          
-
-          {/* <div className="mt-6">
-            <h2 className="text-xl font-semibold mb-2 text-gray-400">
-              Room Features
-            </h2>
-            <ul className="text-gray-600 space-y-2 flex justify-evenly">
-              <li>✔Private pool</li>
-              <li>✔Rain Shower</li>
-              <li>✔jiacuzzi</li>
-            </ul>
-          </div> */}
         </div>
       </div>
     </div>

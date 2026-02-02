@@ -196,6 +196,7 @@ export const getUser = async () => {
 export const createHistory = async (history: {
   roomId: string;
   days: string[];
+  paymentReference: string;
 }) => {
   try {
     const user = await getUser();
@@ -210,10 +211,9 @@ export const createHistory = async (history: {
 
     await dbConnect();
 
-   
     const existingBooking = await HistoryModel.findOne({
       roomId: history.roomId,
-      days: { $in: history.days }, 
+      days: { $in: history.days },
     });
 
     if (existingBooking) {
@@ -223,11 +223,12 @@ export const createHistory = async (history: {
       };
     }
 
-    // ✅ SAVE BOOKING
+    
     await HistoryModel.create({
       roomId: history.roomId,
       days: history.days,
       email: user.email,
+      paymentReference:history.paymentReference,
     });
 
     return {

@@ -1,16 +1,18 @@
 import { Schema, model, models, Document } from "mongoose";
 
-export interface IHistory{
+export interface IHistory {
   roomId: string;
   email: string;
   days: string[];
+  paymentReference:string;
 }
 
 const HistorySchema = new Schema<IHistory>(
   {
     roomId: { type: String, required: true },
     email: { type: String, required: true },
-    days: { type: [String], default: []},
+    days: { type: [String], default: [] },
+    paymentReference: { type: String, required: true },
   },
   { timestamps: true },
 );
