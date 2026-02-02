@@ -176,19 +176,7 @@ export default function UserDashboard() {
                 <MapPin size={16} /> Currently browsing from Paris, France
               </p>
             </div>
-            <div className="flex gap-3">
-              <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                  <Star size={20} />
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">
-                    Membership
-                  </p>
-                  <p className="text-sm font-bold">Gold Status</p>
-                </div>
-              </div>
-            </div>
+           
           </motion.div>
         </section>
 
