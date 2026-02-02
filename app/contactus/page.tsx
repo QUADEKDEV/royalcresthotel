@@ -6,7 +6,6 @@ import LandingNav from "../components/LandingNav";
 import { SendMessage } from "../utils/actions";
 import toast from "react-hot-toast";
 
-
 import {
   MapPin,
   Phone,
