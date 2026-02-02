@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -26,11 +25,11 @@ const upcomingBookings = [
     id: 1,
     property: "Royalcrest Night",
     room: "Royal Ocean Penthouse",
-    dates: "Oct 12 - Oct 18",
+    dates: "Mar 12 -Mar 18",
     status: "Upcoming",
     img: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=2070&auto=format&fit=crop",
   },
-  
+
   {
     id: 2,
     property: "Mufasa Monday",
@@ -177,7 +176,6 @@ export default function UserDashboard() {
                 <MapPin size={16} /> Currently browsing from Paris, France
               </p>
             </div>
-           
           </motion.div>
         </section>
 
@@ -234,7 +232,8 @@ export default function UserDashboard() {
                     Royal Crest Bonus
                   </h2>
                   <p className="text-slate-400 text-sm mb-6">
-                     4 more nights to go, enjoy up to 25% percent bonus on your stay. 
+                    4 more nights to go, enjoy up to 25% percent bonus on your
+                    stay.
                   </p>
                   <div className="w-full bg-white/10 h-2 rounded-full mb-2">
                     <div className="bg-amber-500 h-full rounded-full w-[75%]" />
@@ -253,7 +252,6 @@ export default function UserDashboard() {
 
           {/* Sidebar Panel */}
           <div className="space-y-8">
-
             {/* Past Experiences */}
             <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
               <h2 className="text-lg font-serif font-bold mb-6">
