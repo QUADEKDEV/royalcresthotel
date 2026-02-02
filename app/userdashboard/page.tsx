@@ -105,7 +105,7 @@ useEffect(() => {
           { name: "Reservations", icon: <Calendar size={20} /> },
           { name: "Explore", icon: <Compass size={20} /> },
           { name: "Favorites", icon: <Heart size={20} /> },
-          { name: "Membership", icon: <Star size={20} /> },
+          // { name: "Membership", icon: <Star size={20} /> },
         ].map((item) => (
           <button
             key={item.name}
@@ -296,6 +296,32 @@ useEffect(() => {
           {/* Sidebar Panel */}
           <div className="space-y-8">
             {/* Past Experiences */}
+
+            {loading && <p className="text-sm text-slate-400">Loading...</p>}
+
+            {!loading && history.length === 0 && (
+              <p className="text-sm text-slate-400">No history yet</p>
+            )}
+
+            {history.map((item, i) => (
+              <div key={i} className="flex items-start justify-between">
+                <div>
+                  <p className="text-sm font-bold text-slate-900">
+                    {item.subject}
+                  </p>
+                  <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
+                    {new Date(item.createdAt).toDateString()}
+                  </p>
+                </div>
+
+                <div className="flex gap-0.5 text-amber-400">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={10} fill="currentColor" />
+                  ))}
+                </div>
+              </div>
+            ))}
+
             <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
               <h2 className="text-lg font-serif font-bold mb-6">
                 Recent Stays
