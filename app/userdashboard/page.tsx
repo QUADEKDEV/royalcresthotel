@@ -100,6 +100,9 @@ useEffect(() => {
           <X size={24} />
         </button>
       </div>
+      <button onClick={()=>(window.location.href="/")}>
+        Home
+      </button>
 
       <nav className="space-y-2 flex-1">
         {[
