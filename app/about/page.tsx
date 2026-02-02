@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import NavBar from "../components/NavBar";
+import LandingNav from "../components/LandingNav";
 import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import {Award,Globe,ShieldCheck,Heart,ArrowRight,Play,ChevronDown,} from "lucide-react";
@@ -36,8 +37,8 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans selection:bg-amber-200 selection:text-amber-900">
-      <NavBar/>
-  
+      {/* <NavBar/> */}
+  <LandingNav/>
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img

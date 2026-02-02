@@ -58,7 +58,7 @@ const LandingNav = () => {
               scrolled
                 ? "bg-slate-900 text-white hover:bg-slate-800"
                 : "bg-white text-slate-900 hover:bg-slate-100"
-            }`}
+            }`} onClick={()=>(window.location.href="/login")}
           >
             Sign In
           </button>
