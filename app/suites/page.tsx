@@ -21,7 +21,7 @@ const suites = [
     id: 1,
     name: "Royal Ocean Penthouse",
     category: "Signature",
-    price: 1250,
+    price: 125000,
     size: "185 m²",
     guests: "2-4 Adults",
     beds: "1 King, 1 Sofa",
@@ -38,7 +38,7 @@ const suites = [
     id: 2,
     name: "Azure Garden Suite",
     category: "Classic",
-    price: 750,
+    price: 75000,
     size: "95 m²",
     guests: "2 Adults",
     beds: "1 King Bed",
@@ -51,7 +51,7 @@ const suites = [
     id: 3,
     name: "Luminary Duplex",
     category: "Signature",
-    price: 2100,
+    price: 210000,
     size: "320 m²",
     guests: "4-6 Adults",
     beds: "2 King, 2 Queen",
@@ -64,7 +64,7 @@ const suites = [
     id: 4,
     name: "Sanctuary Spa Villa",
     category: "Wellness",
-    price: 980,
+    price: 98000,
     size: "120 m²",
     guests: "2 Adults",
     beds: "1 California King",
@@ -83,7 +83,7 @@ export default function SuitesPage() {
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] font-sans selection:bg-amber-200 selection:text-amber-900">
-      <LandingNav/>
+      <LandingNav />
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -184,7 +184,7 @@ export default function SuitesPage() {
                         Starting from
                       </p>
                       <p className="text-2xl font-serif font-bold text-amber-400">
-                        ${suite.price}
+                        ₦{suite.price}
                         <span className="text-sm text-white font-sans font-normal">
                           {" "}
                           /night
