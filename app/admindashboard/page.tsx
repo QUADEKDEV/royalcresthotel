@@ -236,7 +236,7 @@ export default function AdminDashboard() {
             },
             {
               label: "Occupancy Rate",
-              value: `${stats.occupancyRate}`,
+              value: `${stats.occupancyRate}%`,
               icon: <CheckCircle2 className="text-blue-500" />,
               trend: "+5%",
             },
