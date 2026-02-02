@@ -1,5 +1,7 @@
 "use client";
 
+
+
 import { useState } from "react";
 
 export default function UploadPage() {
@@ -12,6 +14,9 @@ export default function UploadPage() {
     const reader = new FileReader();
     reader.readAsDataURL(file);
 
+
+
+
     reader.onloadend = async () => {
       const res = await fetch("/api/upload", {
         method: "POST",
@@ -20,10 +25,24 @@ export default function UploadPage() {
       });
 
       const data = await res.json();
+     // console.log("API RESPONSE 👉", data);
+      alert( data);
       setImageUrl(data.url);
-       alert(data.url); 
+      alert(data.url);
     };
-  };
+
+  //   reader.onloadend = async () => {
+  //     const res = await fetch("/api/upload", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ image: reader.result }),
+  //     });
+
+  //     const data = await res.json();
+  //     setImageUrl(data.url);
+  //      alert(data.url); 
+  //   };
+   };
 
   return (
     <div>
