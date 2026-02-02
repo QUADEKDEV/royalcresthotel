@@ -23,7 +23,7 @@ export default function BookingDates({ roomId, price }: { roomId: string; price:
     reference: new Date().getTime().toString(),
     email: "adejumobiquadri@gmail.com",
     amount: totalPrice * 100, // Amount in Kobo
-    publicKey: "pk_test_4e10a6139a48c0952af3300ae049d526fa9a29d4",
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
   };
 
   const initializePayment = usePaystackPayment(config);
@@ -60,6 +60,7 @@ export default function BookingDates({ roomId, price }: { roomId: string; price:
       return;
     }
     // Check 2: Key
+    alert(process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY);
     if (!process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
       toast.error("Payment configuration missing. Check .env file.");
        toast.error("PUBLIC KEY MISSING")
