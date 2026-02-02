@@ -53,7 +53,12 @@ const LandingNav = () => {
           <a href="/about" className="hover:text-amber-500 transition-colors">
             About Us
           </a>
-
+          <a
+            href="/userdashboard"
+            className="hover:text-amber-500 transition-colors"
+          >
+            Dashboard
+          </a>
           <button
             className={`px-6 py-2 rounded-full transition-all ${
               scrolled
@@ -92,12 +97,10 @@ const LandingNav = () => {
               <a href="/">Home</a>
               <a href="/suites">Suites</a>
               <a href="/about">About Us</a>
-              <a href="contactus">Contact Us</a>
+              <a href="/contactus">Contact Us</a>
+              <a href="/userdashboard">Dashboard</a>
               <button
-                className={`px-6 py-2 rounded-full transition-all ${
-                   "bg-slate-900 text-white hover:bg-slate-800"
-                   
-                }`}
+                className={`px-6 py-2 rounded-full transition-all ${"bg-slate-900 text-white hover:bg-slate-800"}`}
                 onClick={() => (window.location.href = "/login")}
               >
                 Sign In
