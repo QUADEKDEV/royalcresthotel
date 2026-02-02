@@ -266,12 +266,6 @@ export const SendMessage=async(enquire:{firstname:string,lastname:string,email:s
       message: "Message sent successfully",
     };
   } catch (error) {
-    if (error instanceof MongoServerError && error.code === 11000) {
-      return {
-        status: false,
-        message: "Something Went Wrong",
-      };
-    }
     return {
       status: false,
       message: "something went wrong",
