@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { logout, addRoom } from "../utils/actions";
+import { getAdminDashboardData } from "../utils/actions";
+import { useEffect } from "react";
 import {
   LayoutDashboard,
   Plus,
@@ -25,19 +27,46 @@ import {
 import toast from "react-hot-toast";
 
 // Mock initial data
-const initialRooms = [
-  {
-    id: 1,
-    name: "Royal Ocean Penthouse",
-    price: 1250,
-    category: "Signature",
-    status: "Available",
-    guests: 4,
-  },
-];
+
+
+const [rooms, setRooms] = useState<any[]>([]);
+const [stats, setStats] = useState({
+  totalRevenue: 0,
+  occupancyRate: 0,
+  totalBookings: 0,
+});
+
+
+
+useEffect(() => {
+  async function loadDashboard() {
+    const data = await getAdminDashboardData();
+    if (!data) return;
+
+    setRooms(data.rooms);
+    setStats(data.stats);
+  }
+
+  loadDashboard();
+}, []);
+
+
+
+
+
+// const initialRooms = [
+//   {
+//     id: 1,
+//     name: "Royal Ocean Penthouse",
+//     price: 1250,
+//     category: "Signature",
+//     status: "Available",
+//     guests: 4,
+//   },
+// ];
 
 export default function AdminDashboard() {
-  const [rooms, setRooms] = useState(initialRooms);
+  // const [rooms, setRooms] = useState(initialRooms);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [newRoom, setNewRoom] = useState({
@@ -200,19 +229,19 @@ export default function AdminDashboard() {
           {[
             {
               label: "Total Revenue",
-              value: "$42,850",
+              value: `₦${stats.totalRevenue.toLocaleString()}`,
               icon: <TrendingUp className="text-emerald-500" />,
               trend: "+12%",
             },
             {
               label: "Occupancy Rate",
-              value: "84%",
+              value: `${stats.occupancyRate}`,
               icon: <CheckCircle2 className="text-blue-500" />,
               trend: "+5%",
             },
             {
               label: "Pending Requests",
-              value: "12",
+              value: stats.totalBookings.toString(),
               icon: <AlertCircle className="text-amber-500" />,
               trend: "Active",
             },

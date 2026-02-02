@@ -6,6 +6,8 @@ import { logout } from "../utils/actions";
 import { getUserDashboardData } from "../utils/actions";
 
 
+
+
 import {
   Home,
   Calendar,
@@ -325,24 +327,6 @@ useEffect(() => {
                   </div>
                 </div>
               ))}
-              {/* {history.map((item, i) => (
-                <div key={i} className="flex items-start justify-between">
-                  <div>
-                    <p className="text-sm font-bold text-slate-900">
-                      {item.subject}
-                    </p>
-                    <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
-                      {new Date(item.createdAt).toDateString()}
-                    </p>
-                  </div>
-
-                  <div className="flex gap-0.5 text-amber-400">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} size={10} fill="currentColor" />
-                    ))}
-                  </div>
-                </div>
-              ))} */}
 
               <button className="w-full mt-8 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors">
                 Download History

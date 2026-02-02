@@ -273,12 +273,6 @@ export const SendMessage=async(enquire:{firstname:string,lastname:string,email:s
   }
 
 }
-
-
-
-
-
-
 export async function getUserDashboardData() {
   await dbConnect();
 
@@ -334,46 +328,62 @@ export async function getUserDashboardData() {
 
 
 
-// export async function getUserDashboardData() {
-//   await dbConnect();
 
-//   // 1️⃣ Get logged-in user from session/cookie
-//   const sessionUser = await getUser();
-//   // expected: { email: string }
+export async function getAdminDashboardData() {
+  await dbConnect();
 
-//   if (!sessionUser?.email) {
-//     return null;
-//   }
+  // COUNTS
+  const totalRooms = await RoomModel.countDocuments();
+  const totalGuests = await UserModel.countDocuments({ role: "guest" });
+  const totalBookings = await HistoryModel.countDocuments();
 
-//   // 2️⃣ Fetch full user record
-//   const user = await UserModel.findOne({ email: sessionUser.email })
-//     .select("firstname lastname email role")
-//     .lean();
+  // FETCH DATA
+  const rooms = await RoomModel.find().lean();
+  const histories = await HistoryModel.find().lean();
 
-//   if (!user) return null;
+  // REVENUE CALCULATION
+  let totalRevenue = 0;
 
-//   // 3️⃣ Fetch booking/history records for this user
-//   const history = await HistoryModel.find({ email: user.email })
-//     .sort({ createdAt: -1 })
-//     .lean();
+  const roomMap = new Map(
+    rooms.map((room: any) => [room._id.toString(), room]),
+  );
 
-//   // 4️⃣ Shape data for dashboard
-//   return {
-//     user: {
-//       firstname: user.firstname,
-//       lastname: user.lastname,
-//       email: user.email,
-//       role: user.role,
-//     },
-//     history: history.map((item) => ({
-//       id: item._id.toString(),
-//       roomId: item.roomId,
-//       days: item.days,
-//       paymentReference: item.paymentReference,
-//       createdAt: item.createdAt,
-//     })),
-//   };
-// }
+  histories.forEach((history) => {
+    const room = roomMap.get(history.roomId);
+    if (room) {
+      totalRevenue += room.price * history.days.length;
+    }
+  });
+
+  // OCCUPANCY
+  const bookedRoomIds = new Set(histories.map((h) => h.roomId));
+  const occupancyRate =
+    totalRooms === 0 ? 0 : Math.round((bookedRoomIds.size / totalRooms) * 100);
+
+  // ROOM INVENTORY
+  const inventory = rooms.map((room: any) => ({
+    id: room._id.toString(),
+    name: room.name,
+    price: room.price,
+    category: room.category,
+    guests: room.capacity,
+    status: bookedRoomIds.has(room._id.toString()) ? "Booked" : "Available",
+  }));
+
+  return {
+    stats: {
+      totalRevenue,
+      occupancyRate,
+      totalBookings,
+    },
+    counts: {
+      totalRooms,
+      totalGuests,
+    },
+    rooms: inventory,
+  };
+}
+
 
 
 
