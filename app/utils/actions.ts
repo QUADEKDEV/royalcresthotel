@@ -279,31 +279,47 @@ export const SendMessage=async(enquire:{firstname:string,lastname:string,email:s
 
 
 
-
 export async function getUserDashboardData() {
   await dbConnect();
 
-  // 1️⃣ Get logged-in user from session/cookie
+  // 1️⃣ Logged-in user
   const sessionUser = await getUser();
-  // expected: { email: string }
+  if (!sessionUser?.email) return null;
 
-  if (!sessionUser?.email) {
-    return null;
-  }
-
-  // 2️⃣ Fetch full user record
+  // 2️⃣ User record
   const user = await UserModel.findOne({ email: sessionUser.email })
     .select("firstname lastname email role")
     .lean();
 
   if (!user) return null;
 
-  // 3️⃣ Fetch booking/history records for this user
-  const history = await HistoryModel.find({ email: user.email })
+  // 3️⃣ User booking history
+  const histories = await HistoryModel.find({ email: user.email })
     .sort({ createdAt: -1 })
     .lean();
 
-  // 4️⃣ Shape data for dashboard
+  // 4️⃣ Fetch all related rooms in ONE query (important for performance)
+  const roomIds = histories.map((h) => h.roomId);
+
+  const rooms = await RoomModel.find({ _id: { $in: roomIds } })
+    .select("name")
+    .lean();
+
+  // 5️⃣ Create lookup map: roomId → roomName
+  const roomMap = new Map(
+    rooms.map((room) => [room._id.toString(), room.name]),
+  );
+
+  // 6️⃣ Merge history + room name
+  const historyWithRoom = histories.map((item) => ({
+    id: item._id.toString(),
+    roomId: item.roomId,
+    roomName: roomMap.get(item.roomId) || "Unknown Room",
+    days: item.days,
+    paymentReference: item.paymentReference,
+    createdAt: item.createdAt,
+  }));
+
   return {
     user: {
       firstname: user.firstname,
@@ -311,15 +327,53 @@ export async function getUserDashboardData() {
       email: user.email,
       role: user.role,
     },
-    history: history.map((item) => ({
-      id: item._id.toString(),
-      roomId: item.roomId,
-      days: item.days,
-      paymentReference: item.paymentReference,
-      createdAt: item.createdAt,
-    })),
+    history: historyWithRoom,
   };
 }
+
+
+
+
+// export async function getUserDashboardData() {
+//   await dbConnect();
+
+//   // 1️⃣ Get logged-in user from session/cookie
+//   const sessionUser = await getUser();
+//   // expected: { email: string }
+
+//   if (!sessionUser?.email) {
+//     return null;
+//   }
+
+//   // 2️⃣ Fetch full user record
+//   const user = await UserModel.findOne({ email: sessionUser.email })
+//     .select("firstname lastname email role")
+//     .lean();
+
+//   if (!user) return null;
+
+//   // 3️⃣ Fetch booking/history records for this user
+//   const history = await HistoryModel.find({ email: user.email })
+//     .sort({ createdAt: -1 })
+//     .lean();
+
+//   // 4️⃣ Shape data for dashboard
+//   return {
+//     user: {
+//       firstname: user.firstname,
+//       lastname: user.lastname,
+//       email: user.email,
+//       role: user.role,
+//     },
+//     history: history.map((item) => ({
+//       id: item._id.toString(),
+//       roomId: item.roomId,
+//       days: item.days,
+//       paymentReference: item.paymentReference,
+//       createdAt: item.createdAt,
+//     })),
+//   };
+// }
 
 
 

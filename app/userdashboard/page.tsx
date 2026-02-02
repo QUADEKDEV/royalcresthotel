@@ -305,8 +305,27 @@ useEffect(() => {
               {!loading && history.length === 0 && (
                 <p className="text-sm text-slate-400">No history yet</p>
               )}
-
               {history.map((item, i) => (
+                <div key={i} className="flex items-start justify-between">
+                  <div>
+                    <p className="text-sm font-bold text-slate-900">
+                      {item.roomName}
+                    </p>
+
+                    <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
+                      {new Date(item.createdAt).toDateString()} •{" "}
+                      {item.days.length} nights
+                    </p>
+                  </div>
+
+                  <div className="flex gap-0.5 text-amber-400">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} size={10} fill="currentColor" />
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {/* {history.map((item, i) => (
                 <div key={i} className="flex items-start justify-between">
                   <div>
                     <p className="text-sm font-bold text-slate-900">
@@ -323,29 +342,8 @@ useEffect(() => {
                     ))}
                   </div>
                 </div>
-              ))}
-              <div className="space-y-6">
-                {[
-                  { name: "Lumina Paris", date: "August 2023", rating: 5 },
-                  { name: "Lumina London", date: "June 2023", rating: 5 },
-                ].map((stay, i) => (
-                  <div key={i} className="flex items-start justify-between">
-                    <div>
-                      <p className="text-sm font-bold text-slate-900">
-                        {stay.name}
-                      </p>
-                      <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">
-                        {stay.date}
-                      </p>
-                    </div>
-                    <div className="flex gap-0.5 text-amber-400">
-                      {[...Array(stay.rating)].map((_, j) => (
-                        <Star key={j} size={10} fill="currentColor" />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              ))} */}
+
               <button className="w-full mt-8 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-slate-900 transition-colors">
                 Download History
               </button>
