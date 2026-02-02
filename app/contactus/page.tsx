@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 import LandingNav from "../components/LandingNav";
 import { SendMessage } from "../utils/actions";
-
+import toast from "react-hot-toast";
 
 
 import {
@@ -167,7 +167,7 @@ const handleSubmit = async (e: React.FormEvent) => {
   setLoading(false);
 
   if (res.status) {
-    alert("Message sent successfully 🎉");
+    toast.success("Message sent successfully 🎉");
     setForm({
       firstname: "",
       lastname: "",
@@ -176,7 +176,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       message: "",
     });
   } else {
-    alert(res.message);
+    toast.error(res.message);
   }
 };
 
