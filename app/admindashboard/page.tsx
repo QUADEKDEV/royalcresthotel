@@ -265,7 +265,6 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        //Inventory List
         <section className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
           <div className="p-6 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 className="font-serif font-bold text-xl">Current Inventory</h2>
@@ -354,7 +353,7 @@ export default function AdminDashboard() {
         </section>
       </main>
 
-      //Add Room Modal Overlay 
+
       <AnimatePresence>
         {isModalOpen && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
