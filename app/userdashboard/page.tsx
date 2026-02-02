@@ -24,17 +24,18 @@ import {
 const upcomingBookings = [
   {
     id: 1,
-    property: "Lumina Maldives Resort",
+    property: "Royalcrest Night",
     room: "Royal Ocean Penthouse",
     dates: "Oct 12 - Oct 18",
-    status: "Confirmed",
-    img: "https://images.unsplash.com/photo-1548263543-d52341e22081?auto=format&fit=crop&q=80&w=200",
+    status: "Upcoming",
+    img: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=2070&auto=format&fit=crop",
   },
+  
   {
     id: 2,
-    property: "Lumina Kyoto",
+    property: "Mufasa Monday",
     room: "Zen Garden Suite",
-    dates: "Dec 05 - Dec 10",
+    dates: "Feb 02 ",
     status: "Upcoming",
     img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=200",
   },
