@@ -230,11 +230,10 @@ export default function UserDashboard() {
               <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
                 <div className="flex-1">
                   <h2 className="text-2xl font-serif font-bold mb-2">
-                    Road to Platinum
+                    Royal Crest Bonus
                   </h2>
                   <p className="text-slate-400 text-sm mb-6">
-                    Stay 4 more nights to unlock 24/7 concierge and private
-                    airport transfers.
+                     4 more nights to go, enjoy up to 25% percent bonus on your stay. 
                   </p>
                   <div className="w-full bg-white/10 h-2 rounded-full mb-2">
                     <div className="bg-amber-500 h-full rounded-full w-[75%]" />
