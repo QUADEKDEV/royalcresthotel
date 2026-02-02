@@ -23,7 +23,7 @@ export default function BookingDates({ roomId, price }: { roomId: string; price:
     reference: new Date().getTime().toString(),
     email: "adejumobiquadri@gmail.com",
     amount: totalPrice * 100, // Amount in Kobo
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
+    publicKey: "pk_test_4e10a6139a48c0952af3300ae049d526fa9a29d4",
   };
 
   const initializePayment = usePaystackPayment(config);
