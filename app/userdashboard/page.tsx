@@ -198,7 +198,7 @@ export default function UserDashboard() {
             {/* Upcoming Stays */}
             <div>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-serif font-bold">Upcoming Stays</h2>
+                <h2 className="text-xl font-serif font-bold">New packages</h2>
                 <button className="text-sm font-bold text-amber-600 hover:text-amber-700">
                   View All
                 </button>
