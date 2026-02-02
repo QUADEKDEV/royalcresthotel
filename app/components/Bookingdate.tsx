@@ -27,7 +27,7 @@ export default function BookingDates({
     reference: new Date().getTime().toString(),
     email: "adejumobiquadri@gmail.com",
     amount: totalPrice * 100,
-    publicKey: process.env.PUBLIC_KEY!,
+    publicKey:process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,,
   };
 
   const initializePayment = usePaystackPayment(config);
