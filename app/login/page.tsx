@@ -69,7 +69,7 @@ const handleLogin = async (e: React.FormEvent) => {
     );
    window.location.href = getRedirectPath(response.role)
 
-    window.location.href = "/admindashboard";
+    // window.location.href = "/admindashboard";
   } catch (err) {
     toast.error("Something went wrong");
     setError("Something went wrong");
