@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
+import LandingNav from "../components/LandingNav";
 import {
   MapPin,
   Phone,
@@ -13,7 +14,7 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import NavBar from "../components/NavBar";
+
 
 // --- Types for Leaflet (Mocking for TypeScript since we load via CDN) ---
 declare global {
@@ -196,7 +197,7 @@ const ContactForm = () => {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-amber-100 selection:text-amber-900 pt-20">
-      <NavBar />
+     <LandingNav/>
 
       {/* Header */}
       <div className="bg-slate-900 text-white py-20 px-6">
