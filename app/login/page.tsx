@@ -16,7 +16,17 @@ export default function LoginPage() {
   const [error, setError] = useState('');
 
 
-
+ const getRedirectPath = (role: string) => {
+   switch (role) {
+     case "admin":
+       return "/admindashboard";
+     case "staff":
+       return "/staffdashboard";
+     case "guest":
+     default:
+       return "/userdashboard";
+   }
+ };
 
   // const handleLogin =async (e: React.FormEvent) => {
   //   e.preventDefault();
@@ -57,6 +67,7 @@ const handleLogin = async (e: React.FormEvent) => {
         ? response.message
         : "Login successful",
     );
+   window.location.href = getRedirectPath(response.role)
 
     window.location.href = "/admindashboard";
   } catch (err) {

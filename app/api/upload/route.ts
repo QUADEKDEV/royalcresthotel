@@ -2,7 +2,7 @@ import cloudinary from "@/app/lib/cloudinary";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { image } = await req.json(); // base64 image
+  const { image } = await req.json(); 
 
   try {
     const result = await cloudinary.uploader.upload(image, {

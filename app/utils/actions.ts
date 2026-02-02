@@ -83,6 +83,7 @@ export const signIn=async(LogData:{email:string, password:string})=>{
     return {
       success: true,
       message: "user successfully logged in",
+      role:user.role
     };
   } catch (error) {
     return {
