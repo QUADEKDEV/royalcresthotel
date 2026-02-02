@@ -29,26 +29,6 @@ import toast from "react-hot-toast";
 // Mock initial data
 
 
-const [rooms, setRooms] = useState<any[]>([]);
-const [stats, setStats] = useState({
-  totalRevenue: 0,
-  occupancyRate: 0,
-  totalBookings: 0,
-});
-
-
-
-useEffect(() => {
-  async function loadDashboard() {
-    const data = await getAdminDashboardData();
-    if (!data) return;
-
-    setRooms(data.rooms);
-    setStats(data.stats);
-  }
-
-  loadDashboard();
-}, []);
 
 
 
@@ -66,6 +46,27 @@ useEffect(() => {
 // ];
 
 export default function AdminDashboard() {
+
+
+  const [rooms, setRooms] = useState<any[]>([]);
+  const [stats, setStats] = useState({
+    totalRevenue: 0,
+    occupancyRate: 0,
+    totalBookings: 0,
+  });
+
+  useEffect(() => {
+    async function loadDashboard() {
+      const data = await getAdminDashboardData();
+      if (!data) return;
+
+      setRooms(data.rooms);
+      setStats(data.stats);
+    }
+
+    loadDashboard();
+  }, []);
+
   // const [rooms, setRooms] = useState(initialRooms);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
