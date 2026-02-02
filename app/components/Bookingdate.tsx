@@ -64,7 +64,7 @@ const handleBooking = () => {
     toast.error("Please select valid booking dates");
     return;
   }
-
+  toast.error(days.length.toString())
   initializePayment({ onSuccess, onClose });
 };
 
