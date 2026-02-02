@@ -1,4 +1,4 @@
-"use client";
+
 
 
 "use client";
@@ -62,7 +62,7 @@ export default function BookingDates({ roomId, price }: { roomId: string; price:
     // Check 2: Key
     if (!process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
       toast.error("Payment configuration missing. Check .env file.");
-      console.error("PUBLIC KEY MISSING");
+       toast.error("PUBLIC KEY MISSING")
       return;
     }
     // Check 3: Amount
@@ -74,6 +74,29 @@ export default function BookingDates({ roomId, price }: { roomId: string; price:
     // Trigger Popup
     initializePayment({ onSuccess, onClose });
   };
+
+
+ const today = new Date().toISOString().split("T")[0];
+  useEffect(() => {
+      if (!checkIn || !checkOut) return;
+      const start = new Date(checkIn);
+      const end = new Date(checkOut);
+      if (start < new Date(today)) {
+        setCheckIn("");
+        return;
+      }
+      if (start > end) {
+        setCheckOut("");
+        return;
+      }
+      const dates: string[] = [];
+      let current = new Date(start);
+      while (current <= end) {
+        dates.push(current.toISOString().split("T")[0]);
+        current.setDate(current.getDate() + 1);
+      }
+      setDays(dates);
+    }, [checkIn, checkOut, today]);
 
   // ... (Keep your date calculation useEffect here) ...
 
