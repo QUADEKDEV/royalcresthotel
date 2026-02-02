@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import { logout } from "../utils/actions";
 import {
   Home,
   Calendar,
@@ -43,6 +45,15 @@ const upcomingBookings = [
 export default function UserDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("Overview");
+
+   const handleLogout = async () => {
+      const response = await logout();
+      if (!response) {
+        toast.error("Something went wrong");
+      }
+      toast.success(response.message);
+      window.location.href = "/login";
+    };
 
   const SidebarContent = () => (
     <>
@@ -96,7 +107,7 @@ export default function UserDashboard() {
               Gold Member
             </p>
           </div>
-          <LogOut
+          <LogOut onClick={handleLogout}
             size={16}
             className="text-slate-300 cursor-pointer hover:text-slate-900"
           />
@@ -173,7 +184,7 @@ export default function UserDashboard() {
                 Welcome back, Julianne
               </h1>
               <p className="text-slate-500 mt-2 flex items-center gap-2">
-                <MapPin size={16} /> Currently browsing from Paris, France
+                <MapPin size={16} /> Currently browsing.
               </p>
             </div>
           </motion.div>
